@@ -579,5 +579,85 @@ x=2000
 2000
 ```
 
+## Alias in shell
 
+```
+$
+[ashu@linux-dotnet ~]$
+[ashu@linux-dotnet ~]$ alias   d=date
+
+
+[ashu@linux-dotnet ~]$ d
+Mon Dec 11 10:20:18 GMT 2023
+[ashu@linux-dotnet ~]$
+[ashu@linux-dotnet ~]$
+
+[ashu@linux-dotnet ~]$ date
+Mon Dec 11 10:20:25 GMT 2023
+[ashu@linux-dotnet ~]$
+
+====>>
+
+[ashu@linux-dotnet ~]$ alias  year='date +%Y'
+[ashu@linux-dotnet ~]$ year
+2023
+[ashu@linux-dotnet ~]$
+
+
+
+```
+
+### making rm command interactive 
+
+```
+
+[ashu@linux-dotnet ~]$ cat  .bashrc
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+        . /etc/bashrc
+fi
+
+# User specific environment
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
+then
+    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+fi
+
+PATH=$PATH:/home/ashu/command
+export PATH
+
+
+
+# Uncomment the following line if you don't like systemctl's auto-paging feature:
+# export SYSTEMD_PAGER=
+
+# User specific aliases and functions
+
+alias  year='date +%Y'
+alias  d='date'
+alias  rm='rm -i'
+```
+
+### testing it 
+
+```
+ source  .bashrc
+[ashu@linux-dotnet ~]$
+[ashu@linux-dotnet ~]$ ls
+ashu.txt  hello  newdir
+[ashu@linux-dotnet ~]$ rm  ashu.txt
+rm: remove regular file 'ashu.txt'? n
+
+
+[ashu@linux-dotnet ~]$ ls
+ashu.txt  hello  newdir
+[ashu@linux-dotnet ~]$
+
+[ashu@linux-dotnet ~]$ rm  ashu.txt
+rm: remove regular file 'ashu.txt'? y
+[ashu@linux-dotnet ~]$ ls
+hello  newdir
+```
 
