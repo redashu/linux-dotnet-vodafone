@@ -1001,4 +1001,18 @@ sudo  systemctl  start  httpd
 
 ```
 
+### history 
+
+```
+  200  cd ~
+  201  sudo  systemctl  start  httpd
+  202  sudo  systemctl  status  httpd
+  203  sudo  systemctl  stop  httpd
+  204  sudo  systemctl  status  httpd
+  205  sudo  systemctl  start  httpd
+  206  sudo  systemctl  status  httpd
+  207  history
+  208  sudo  systemctl  restart  httpd
+  209  sudo  systemctl  status  httpd
+```
 
