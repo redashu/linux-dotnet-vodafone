@@ -792,5 +792,86 @@ Complete!
 
 ```
 
+## Giving root access to non root users using sudo power 
+
+<img src="sudo.png">
+
+### ashu to sudo group 
+
+```
+ cd  /etc/sudoers.d/
+[root@linux-dotnet sudoers.d]# ls
+090-oca-vss-plugin-commands  091-oca-alx-plugin-commands  100-oracle-cloud-agent-users  90-cloud-init-users
+[root@linux-dotnet sudoers.d]# cat  90-cloud-init-users 
+# Created by cloud-init v. 22.1-8.0.4.el8_8.1 on Sun, 10 Dec 2023 03:33:58 +0000
+
+# User rules for opc
+opc ALL=(ALL) NOPASSWD:ALL
+[root@linux-dotnet sudoers.d]# vim   user-access
+[root@linux-dotnet sudoers.d]# 
+[root@linux-dotnet sudoers.d]# cat user-access 
+ashu ALL=(ALL) NOPASSWD:ALL
+[root@linux-dotnet sudoers.d]# 
+
+```
+
+### lets test with ashu user 
+
+```
+[ashu@linux-dotnet ~]$ whoami
+ashu
+[ashu@linux-dotnet ~]$
+[ashu@linux-dotnet ~]$
+[ashu@linux-dotnet ~]$ yum install telnet
+Error: This command has to be run with superuser privileges (under the root user on most systems).
+[ashu@linux-dotnet ~]$
+[ashu@linux-dotnet ~]$
+[ashu@linux-dotnet ~]$
+[ashu@linux-dotnet ~]$ sudo  yum install telnet
+Last metadata expiration check: 3:19:07 ago on Mon 11 Dec 2023 08:03:58 AM GMT.
+Dependencies resolved.
+============================================================================================================================
+ Package                  Architecture              Version                           Repository                       Size
+============================================================================================================================
+Installing:
+ telnet                   aarch64                   1:0.17-76.el8                     ol8_appstream                    70 k
+
+Transaction Summary
+============================================================================================================================
+Install  1 Package
+
+Total download size: 70 k
+Installed size: 154 k
+Is this ok [y/N]: y
+Downloading Packages:
+telnet-0.17-76.el8.aarch64.rpm                                                              593 kB/s |  70 kB     00:00
+----------------------------------------------------------------------------------------------------------------------------
+Total                                                                                       575 kB/s |  70 kB     00:00
+Running transaction check
+```
+
+### adding users in sudoers group by root user 
+
+```
+# whoami
+root
+[root@linux-dotnet ~]# 
+[root@linux-dotnet ~]# cd  /etc/sudoers.d/
+[root@linux-dotnet sudoers.d]# ls
+090-oca-vss-plugin-commands  091-oca-alx-plugin-commands  100-oracle-cloud-agent-users  90-cloud-init-users  user-access
+[root@linux-dotnet sudoers.d]# cat user-access 
+ashu ALL=(ALL) NOPASSWD:ALL
+[root@linux-dotnet sudoers.d]# vim user-access 
+[root@linux-dotnet sudoers.d]# cat user-access 
+ashu ALL=(ALL) NOPASSWD:ALL
+anuj ALL=(ALL) NOPASSWD:ALL
+pooja ALL=(ALL) NOPASSWD:ALL
+vijay ALL=(ALL) NOPASSWD:ALL
+shailesh ALL=(ALL) NOPASSWD:ALL
+madhuri ALL=(ALL) NOPASSWD:ALL
+[root@linux-dotnet sudoers.d]# 
+
+
+```
 
 
