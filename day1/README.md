@@ -874,4 +874,34 @@ madhuri ALL=(ALL) NOPASSWD:ALL
 
 ```
 
+### web application deployment or hosting 
+
+<img src="webs.png">
+
+### apache httpd 
+
+<img src="httpd.png">
+
+### Installing httpd 
+
+```
+ sudo  yum install httpd
+Last metadata expiration check: 3:41:55 ago on Mon 11 Dec 2023 08:03:58 AM GMT.
+Dependencies resolved.
+============================================================================================================================
+ Package                   Architecture   Version                                            Repository                Size
+============================================================================================================================
+Installing:
+ httpd                     aarch64        2.4.37-62.0.1.module+el8.9.0+90011+2f9c6a23        ol8_appstream            1.4 M
+Installing dependencies:
+ apr                       aarch64        1.6.3-12.el8                                       ol8_appstream            123 k
+ apr-util                  aarch64        1.6.1-9.el8                                        ol8_appstream            105 k
+ httpd-filesystem          noarch         2.4.37-62.0.1.module+el8.9.0+90011+2f9c6a23        ol8_appstream             44 k
+ httpd-tools               aarch64        2.4.37-62.0.1.module+el8.9.0+90011+2f9c6a23        ol8_appstream            110 k
+ mod_http2                 aarch64        1.15.7-8.module+el8.9.0+90011+2f9c6a23.3           ol8_appstream            147 k
+ oracle-logos-httpd        noarch         84.5-1.0.2.el8                                     ol8_baseos_latest         28 k
+Installing weak dependencies:
+ apr-util-bdb              aarch64        1.6.1-9.el8                                        ol8_appstream             25 k
+ apr-util-openssl          aarch64        1.6.1-9.el8
+```
 
