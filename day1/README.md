@@ -205,12 +205,76 @@ a
 └── c
     └── e
 
+
+
 4 directories, 0 files
 [ashu@linux-dotnet ~]$ rm -r  a
 [ashu@linux-dotnet ~]$ ls
 learn  Library
 ```
 
+## file handling 
+
+<img src="file.png">
+
+### creating empty file only 
+
+```
+ whoami
+ashu
+[ashu@linux-dotnet ~]$ pwd
+/home/ashu
+[ashu@linux-dotnet ~]$ ls
+[ashu@linux-dotnet ~]$ touch  ashu.txt
+[ashu@linux-dotnet ~]$ ls
+ashu.txt
+[ashu@linux-dotnet ~]$ touch  a.txt  b.txt
+[ashu@linux-dotnet ~]$ ls
+ashu.txt  a.txt  b.txt
+[ashu@linux-dotnet ~]$ rm  ashu.txt
+[ashu@linux-dotnet ~]$ ls
+a.txt  b.txt
+[ashu@linux-dotnet ~]$ rm  *.txt
+[ashu@linux-dotnet ~]$ ls
+[ashu@linux-dotnet ~]$
+
+```
+
+### use verbose in rm 
+
+```
+$
+[ashu@linux-dotnet ~]$ touch  a.txt  b.txt
+[ashu@linux-dotnet ~]$
+[ashu@linux-dotnet ~]$ rm  -v  *.txt
+removed 'a.txt'
+removed 'b.txt'
+[ashu@linux-dotnet ~]$
+```
+
+### using nano to create and write data in file 
+
+```
+
+[ashu@linux-dotnet ~]$
+[ashu@linux-dotnet ~]$ nano   ashu.txt
+[ashu@linux-dotnet ~]$
+[ashu@linux-dotnet ~]$
+[ashu@linux-dotnet ~]$ ls
+ashu.txt
+[ashu@linux-dotnet ~]$ nano   ashu.txt
+[ashu@linux-dotnet ~]$
+[ashu@linux-dotnet ~]$ nano   ashu.txt
+[ashu@linux-dotnet ~]$
+
+### just read data from file
+
+[ashu@linux-dotnet ~]$ cat  ashu.txt
+hey guys i am writing the content here
+hello world
+okey google
+[ashu@linux-dotnet ~]$
 
 
+```
 
