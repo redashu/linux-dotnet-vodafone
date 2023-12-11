@@ -660,4 +660,137 @@ rm: remove regular file 'ashu.txt'? y
 [ashu@linux-dotnet ~]$ ls
 hello  newdir
 ```
+## software installation or package management in linux 
+
+<img src="pkg.png">
+
+### trying with normal user
+
+```
+
+[ashu@linux-dotnet ~]$
+[ashu@linux-dotnet ~]$ yum  install  telnet
+Error: This command has to be run with superuser privileges (under the root user on most systems).
+[ashu@linux-dotnet ~]$
+[ashu@linux-dotnet ~]$
+[ashu@linux-dotnet ~]$ dnf  install  telnet
+Error: This command has to be run with superuser privileges (under the root user on most systems).
+[ashu@linux-dotnet ~]$
+
+```
+
+### as root user we can install software 
+
+```
+whoami
+root
+[root@linux-dotnet ~]# yum  install telnet 
+Last metadata expiration check: 2:38:25 ago on Mon 11 Dec 2023 08:03:58 AM GMT.
+Dependencies resolved.
+============================================================================================================================
+ Package                  Architecture              Version                           Repository                       Size
+============================================================================================================================
+Installing:
+ telnet                   aarch64                   1:0.17-76.el8                     ol8_appstream                    70 k
+
+Transaction Summary
+============================================================================================================================
+Install  1 Package
+
+Total download size: 70 k
+Installed size: 154 k
+Is this ok [y/N]: n
+Operation aborted.
+[root@linux-dotnet ~]# 
+[root@linux-dotnet ~]# dnf   install telnet 
+Last metadata expiration check: 2:38:48 ago on Mon 11 Dec 2023 08:03:58 AM GMT.
+Dependencies resolved.
+============================================================================================================================
+ Package                  Architecture              Version                           Repository                       Size
+============================================================================================================================
+Installing:
+ telnet                   aarch64                   1:0.17-76.el8                     ol8_appstream                    70 k
+
+Transaction Summary
+============================================================================================================================
+Install  1 Package
+
+Total download size: 70 k
+Installed size: 154 k
+Is this ok [y/N]: y
+Downloading Packages:
+telnet-0.17-76.el8.aarch64.rpm                                                              2.0 MB/s |  70 kB     00:00    
+----------------------------------------------------------------------------------------------------------------------------
+Total                                                                                       1.9 MB/s |  70 kB     00:00     
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                                                                    1/1 
+  Installing       : telnet-1:0.17-76.el8.aarch64                                                                       1/1 
+  Running scriptlet: telnet-1:0.17-76.el8.aarch64               
+```
+
+### as non root user we can check these details 
+
+```
+ rpm  -q  telnet
+telnet-0.17-76.el8.aarch64
+[ashu@linux-dotnet ~]$
+[ashu@linux-dotnet ~]$ rpm  -q -i  telnet
+Name        : telnet
+Epoch       : 1
+Version     : 0.17
+Release     : 76.el8
+Architecture: aarch64
+Install Date: Mon 11 Dec 2023 10:42:51 AM GMT
+Group       : Applications/Internet
+Size        : 157896
+License     : BSD
+Signature   : RSA/SHA256, Wed 07 Apr 2021 11:37:20 AM GMT, Key ID 82562ea9ad986da3
+Source RPM  : telnet-0.17-76.el8.src.rpm
+Build Date  : Wed 07 Apr 2021 11:36:49 AM GMT
+Build Host  : ca-buildarm06.us.oracle.com
+Relocations : (not relocatable)
+Vendor      : Oracle America
+URL         : http://web.archive.org/web/20070819111735/www.hc
+```
+
+### uninstall software as root user 
+
+```
+yum remove  telnet 
+Dependencies resolved.
+============================================================================================================================
+ Package                  Architecture              Version                          Repository                        Size
+============================================================================================================================
+Removing:
+ telnet                   aarch64                   1:0.17-76.el8                    @ol8_appstream                   154 k
+
+Transaction Summary
+============================================================================================================================
+Remove  1 Package
+
+Freed space: 154 k
+Is this ok [y/N]: y
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                                                                    1/1 
+  Erasing          : telnet-1:0.17-76.el8.aarch64                                                                       1/1 
+  Running scriptlet: telnet-1:0.17-76.el8.aarch64                                                                       1/1 
+  Verifying        : telnet-1:0.17-76.el8.aarch64                                                                       1/1 
+
+Removed:
+  telnet-1:0.17-76.el8.aarch64                                                                                              
+
+Complete!
+[root@linux-dotnet ~]# 
+
+```
+
+
 
