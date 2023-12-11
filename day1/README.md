@@ -905,3 +905,100 @@ Installing weak dependencies:
  apr-util-openssl          aarch64        1.6.1-9.el8
 ```
 
+### checking changes by httpd in linux server 
+
+```
+ rpm  -ql  httpd
+/etc/httpd/conf
+/etc/httpd/conf.d/autoindex.conf
+/etc/httpd/conf.d/userdir.conf
+/etc/httpd/conf.d/welcome.conf
+/etc/httpd/conf.modules.d
+/etc/httpd/conf.modules.d/00-base.conf
+/etc/httpd/conf.modules.d/00-dav.conf
+/etc/httpd/conf.modules.d/00-lua.conf
+/etc/httpd/conf.modules.d/00-mpm.conf
+/etc/httpd/conf.modules.d/00-optional.conf
+/etc/httpd/conf.modules.d/00-proxy.conf
+/etc/httpd/conf.modules.d/00-systemd.conf
+/etc/httpd/conf.modules.d/01-cgi.conf
+/etc/httpd/conf.modules.d/README
+/etc/httpd/conf/httpd.conf
+```
+### only want to list configuration related files 
+
+```
+ rpm  -qc  httpd
+/etc/httpd/conf.d/autoindex.conf
+/etc/httpd/conf.d/userdir.conf
+/etc/httpd/conf.d/welcome.conf
+/etc/httpd/conf.modules.d/00-base.conf
+/etc/httpd/conf.modules.d/00-dav.conf
+/etc/httpd/conf.modules.d/00-lua.conf
+/etc/httpd/conf.modules.d/00-mpm.conf
+/etc/httpd/conf.modules.d/00-optional.conf
+/etc/httpd/conf.modules.d/00-proxy.conf
+/etc/httpd/conf.modules.d/00-systemd.conf
+/etc/httpd/conf.modules.d/01-cgi.conf
+/etc/httpd/conf/httpd.conf
+/etc/httpd/conf/magic
+/etc/logrotate.d/httpd
+/etc/sysconfig/htcacheclean
+```
+
+### navigating to the main config file 
+
+```
+ cd  /etc/httpd/
+[ashu@linux-dotnet httpd]$ ls
+conf  conf.d  conf.modules.d  logs  modules  run  state
+[ashu@linux-dotnet httpd]$ cd  conf
+[ashu@linux-dotnet conf]$ ls
+httpd.conf  magic
+```
+
+### now creating sample html page
+
+```
+ cd  /var/www/html/
+[ashu@linux-dotnet html]$ ls
+[ashu@linux-dotnet html]$
+[ashu@linux-dotnet html]$
+[ashu@linux-dotnet html]$ nano ashu.html
+[ashu@linux-dotnet html]$
+[ashu@linux-dotnet html]$
+[ashu@linux-dotnet html]$ sudo nano ashu.html
+[ashu@linux-dotnet html]$
+[ashu@linux-dotnet html]$ ls
+ashu.html
+[ashu@linux-dotnet html]$ cat ashu.html
+<h1> hello world thisis  ashutoshh</h1>
+[ashu@linux-dotnet html]$
+
+
+
+```
+
+### lets start httpd service
+
+```
+sudo  systemctl  start  httpd
+[ashu@linux-dotnet html]$ sudo  systemctl  status  httpd
+● httpd.service - The Apache HTTP Server
+   Loaded: loaded (/usr/lib/systemd/system/httpd.service; disabled; vendor preset: disabled)
+   Active: active (running) since Mon 2023-12-11 12:06:54 GMT; 4s ago
+     Docs: man:httpd.service(8)
+ Main PID: 44052 (httpd)
+   Status: "Started, listening on: port 80"
+    Tasks: 213 (limit: 95068)
+   Memory: 23.1M
+   CGroup: /system.slice/httpd.service
+           ├─44052 /usr/sbin/httpd -DFOREGROUND
+           ├─44053 /usr/sbin/httpd -DFOREGROUND
+           ├─44054 /usr/sbin/httpd -DFOREGROUND
+           ├─44055 /usr/sbin/httpd -DFOREGROUND
+           └─44056 /usr/sbin/httpd -DFOREGROUND
+
+```
+
+
