@@ -538,3 +538,18 @@ Building...
 info: Microsoft.Hosting.Lifetime[14]
 ```
 
+### plz add os level firewall rule also 
+
+```
+sudo firewall-cmd --add-port=5005/tcp 
+success
+[opc@ashu-linux-vm delvex]$ sudo firewall-cmd --add-port=5005/tcp --permanent 
+success
+[opc@ashu-linux-vm delvex]$ 
+[opc@ashu-linux-vm delvex]$ sudo firewall-cmd --list-ports 
+80/tcp 5005/tcp
+[opc@ashu-linux-vm delvex]$ 
+
+```
+
+
