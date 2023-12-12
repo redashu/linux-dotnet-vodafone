@@ -384,6 +384,10 @@ Syntax OK
 
 ```
 
+## Info about .net -- .net core 
+
+<img src="sdk.png">
+
 
 
 
