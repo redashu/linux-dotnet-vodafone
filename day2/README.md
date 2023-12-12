@@ -462,5 +462,79 @@ Downloading Packages:
 
 ```
 
+### Creating sample dotnet app and testing it 
 
+```
+opc@ashu-linux-vm ashudotnetApp]$ pwd
+/home/opc/ashudotnetApp
+[opc@ashu-linux-vm ashudotnetApp]$ ls
+[opc@ashu-linux-vm ashudotnetApp]$ ls
+ConsoleApp1  ConsoleApp1.sln
+[opc@ashu-linux-vm ashudotnetApp]$ cd  ConsoleApp1/
+[opc@ashu-linux-vm ConsoleApp1]$ ls
+bin  ConsoleApp1.csproj  obj  Program.cs
+[opc@ashu-linux-vm ConsoleApp1]$ ls
+bin  ConsoleApp1.csproj  obj  Program.cs
+[opc@ashu-linux-vm ConsoleApp1]$ dotnet  run
+Hello, World!
+[opc@ashu-linux-vm ConsoleApp1]$ dotnet  run
+Hello, World!
+hey there !!
+[opc@ashu-linux-vm ConsoleApp1]$ 
+
+
+
+```
+
+### Creating sample webapp --
+
+```
+ cd ..
+[opc@ashu-linux-vm ashudotnetApp]$ ls
+ConsoleApp1  ConsoleApp1.sln  WebApplication1
+[opc@ashu-linux-vm ashudotnetApp]$ cd  WebApplication1/
+[opc@ashu-linux-vm WebApplication1]$ ls
+appsettings.Development.json  bin          Models  Program.cs  Views                   wwwroot
+appsettings.json              Controllers  obj     Properties  WebApplication1.csproj
+[opc@ashu-linux-vm WebApplication1]$ 
+
+
+```
+
+### running app 
+
+```
+cd  WebApplication1/
+[opc@ashu-linux-vm WebApplication1]$ ls
+appsettings.Development.json  bin          Models  Program.cs  Views                   wwwroot
+appsettings.json              Controllers  obj     Properties  WebApplication1.csproj
+[opc@ashu-linux-vm WebApplication1]$ ls
+appsettings.Development.json  bin          Models  Program.cs  Views                   wwwroot
+appsettings.json              Controllers  obj     Properties  WebApplication1.csproj
+
+### only accessiable to localhost on the server whereever it is running
+[opc@ashu-linux-vm WebApplication1]$ dotnet  run 
+Building...
+warn: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[35]
+      No XML encryptor configured. Key {eb1784b1-d68e-4c11-9a1e-1d889a589642} may be persisted to storage in unencrypted form.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://localhost:5005
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /home/opc/ashudotnetApp/WebApplication1
+^Cinfo: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+
+```
+
+=====>> from any where we can access
+
+```
+[opc@ashu-linux-vm WebApplication1]$ dotnet  run  --urls=http://0.0.0.0:5005 
+Building...
+info: Microsoft.Hosting.Lifetime[14]
+```
 
