@@ -389,5 +389,78 @@ Syntax OK
 <img src="sdk.png">
 
 
+### searching dotnet sdk and runtime support in RHEL 8 
+
+```
+sudo dnf  search dotnet
+Failed loading plugin "osmsplugin": No module named 'librepo'
+Last metadata expiration check: 0:10:10 ago on Tue 12 Dec 2023 11:11:27 AM GMT.
+===================================================== Name Exactly Matched: dotnet ======================================================
+dotnet.x86_64 : .NET CLI tools and runtime
+========================================================= Name Matched: dotnet ==========================================================
+dotnet-apphost-pack-3.0.x86_64 : Targeting Pack for Microsoft.NETCore.App 3.0
+dotnet-apphost-pack-3.1.x86_64 : Targeting Pack for Microsoft.NETCore.App 3.1
+dotnet-apphost-pack-5.0.x86_64 : Targeting Pack for Microsoft.NETCore.App 5.0
+dotnet-apphost-pack-6.0.x86_64 : Targeting Pack for Microsoft.NETCore.App 6.0
+dotnet-apphost-pack-7.0.x86_64 : Targeting Pack for Microsoft.NETCore.App 7.0
+dotnet-apphost-pack-8.0.x86_64 : Targeting Pack for Microsoft.NETCore.App 8.0
+dotnet-host.x86_64 : .NET command line launcher
+dotnet-host-fxr-2.1.x86_64 : .NET Core command line host resolver
+dotnet-hostfxr-3.0.x86_64 : .NET Core command line host resolver
+dotnet-hostfxr-3.1.x86_64 : .NET Core command line host resolver
+dotnet-hostfxr-5.0.x86_64 : .NET command line host resolver
+dotnet-hostfxr-6.0.x86_64 : .NET command line host resolver
+dotnet-hostfxr-7.0.x86_64 : .NET command line host resolver
+dotnet-hostfxr-8.0.x86_64 : .NET command line host resolver
+dotnet-runtime-2.1.x86_64 : NET Core 2.1 runtime
+dotnet-runtime-3.0.x86_64 : NET Core 3.0 runtime
+dotnet-runtime-3.1.x86_64 : NET Core 3.1 runtime
+dotnet-runtime-5.0.x86_64 : NET 5.0 runtime
+dotnet-runtime-6.0.x86_64 : NET 6.0 runtime
+dotnet-runtime-7.0.x86_64 : NET 7.0 runtime
+dotnet-runtime-8.0.x86_64 : NET 8.0 runtime
+dotnet-sdk-2.1.x86_64 : .NET Core 2.1 Software Development Kit
+dotnet-sdk-2.1.5xx.x86_64 : .NET Core 2.1.5xx Software Development Kit
+dotnet-sdk-3.0.x86_64 : .NET Core 3.0 Software Development Kit
+dotnet-sdk-3.1.x86_64 : .NET Core 3.1 Software Development Kit
+dotnet-sdk-5.0.x86_64 : .NET 5.0 Software Development Kit
+dotnet-sdk-6.0.x86_64 : .NET 6.0 Software Development Kit
+
+```
+
+### lets install net 8 
+
+```
+[opc@ashu-linux-vm delvex]$ sudo dnf  install dotnet-sdk-8.0
+Failed loading plugin "osmsplugin": No module named 'librepo'
+Last metadata expiration check: 0:12:50 ago on Tue 12 Dec 2023 11:11:27 AM GMT.
+Dependencies resolved.
+=========================================================================================================================================
+ Package                                       Architecture          Version                              Repository                Size
+=========================================================================================================================================
+Installing:
+ dotnet-sdk-8.0                                x86_64                8.0.100~rc.2-0.2.el8                 appstream                121 M
+Installing dependencies:
+ aspnetcore-runtime-8.0                        x86_64                8.0.0~rc.2-0.2.el8                   appstream                8.0 M
+ aspnetcore-targeting-pack-8.0                 x86_64                8.0.0~rc.2-0.2.el8                   appstream                2.0 M
+ dotnet-apphost-pack-8.0                       x86_64                8.0.0~rc.2-0.2.el8                   appstream                4.0 M
+ dotnet-host                                   x86_64                8.0.0~rc.2-0.2.el8                   appstream                211 k
+ dotnet-hostfxr-8.0                            x86_64                8.0.0~rc.2-0.2.el8                   appstream                155 k
+ dotnet-runtime-8.0                            x86_64                8.0.0~rc.2-0.2.el8                   appstream                 40 M
+ dotnet-targeting-pack-8.0                     x86_64                8.0.0~rc.2-0.2.el8                   appstream                3.2 M
+ dotnet-templates-8.0                          x86_64                8.0.100~rc.2-0.2.el8                 appstream                2.1 M
+ netstandard-targeting-pack-2.1                x86_64                8.0.100~rc.2-0.2.el8                 appstream                1.5 M
+
+Transaction Summary
+=========================================================================================================================================
+Install  10 Packages
+
+Total download size: 183 M
+Installed size: 591 M
+Is this ok [y/N]: y
+Downloading Packages:
+
+```
+
 
 
