@@ -276,6 +276,114 @@ cockpit dhcpv6-client http ssh
 
 ```
 
+## COncept of VirtualHosting 
+
+<img src="vhost.png">
+
+### More closure 
+
+<img src="vhost1.png">
+
+### creating virtualhost 
+
+```
+[opc@ashu-linux-vm conf.d]$ pwd
+/etc/httpd/conf.d
+```
+
+### default.conf 
+
+```
+cat  default.conf 
+<virtualhost *:80>
+
+</virtualhost>
+
+```
+
+### adding two virutalhost 
+
+```
+[opc@ashu-linux-vm conf.d]$ ls
+README  ashu-adhoc.conf  ashu-delvex.conf  autoindex.conf  default.conf  userdir.conf  welcome.conf
+[opc@ashu-linux-vm conf.d]$ cat  default.conf 
+<virtualhost *:80>
+	servername 152.67.9.194
+	documentroot /var/www/html/
+</virtualhost>
+
+[opc@ashu-linux-vm conf.d]$ 
+[opc@ashu-linux-vm conf.d]$ cat  ashu-adhoc.conf 
+<virtualhost *:80>
+	servername ashu.adhocnet.org
+	documentroot /var/www/adhoc/
+</virtualhost>
+
+
+[opc@ashu-linux-vm conf.d]$ 
+[opc@ashu-linux-vm conf.d]$ 
+[opc@ashu-linux-vm conf.d]$ cat  ashu-delvex.conf 
+<virtualhost *:80>
+	servername ashu.delvex.io
+	documentroot /var/www/delvex/
+</virtualhost>
+
+
+[opc@ashu-linux-vm conf.d]$ cd  /var/www/
+[opc@ashu-linux-vm www]$ ls
+cgi-bin  html
+[opc@ashu-linux-vm www]$ sudo mkdir  adhoc delvex
+[opc@ashu-linux-vm www]$ ls
+adhoc  cgi-bin  delvex  html
+
+[opc@ashu-linux-vm www]$ cd  adhoc/
+[opc@ashu-linux-vm adhoc]$ ls
+[opc@ashu-linux-vm adhoc]$ sudo vim  index.html 
+[opc@ashu-linux-vm adhoc]$ cat index.html 
+<h1> Hello adhoc </h1>
+
+[opc@ashu-linux-vm adhoc]$ cd ../delvex/
+[opc@ashu-linux-vm delvex]$ sudo vim  index.html 
+[opc@ashu-linux-vm delvex]$ cat index.html 
+<h1> hello Delvex welcome to linux vhosting </h1>
+[opc@ashu-linux-vm delvex]$ 
+
+```
+
+
+### incase we want to test config changes before restarting service
+
+```
+ httpd  -t
+Syntax OK
+
+======>> OR 
+[opc@ashu-linux-vm conf.d]$ apachectl configtest
+Syntax OK
+[opc@ashu-linux-vm conf.d]$ 
+
+
+
+```
+
+### lets restart service
+
+```
+[opc@ashu-linux-vm conf.d]$ sudo systemctl restart httpd
+[opc@ashu-linux-vm conf.d]$ sudo systemctl status httpd
+● httpd.service - The Apache HTTP Server
+   Loaded: loaded (/usr/lib/systemd/system/httpd.service; enabled; vendor preset: disabled)
+   Active: active (running) since Tue 2023-12-12 09:21:27 GMT; 4s ago
+     Docs: man:httpd.service(8)
+ Main PID: 36024 (httpd)
+   Status: "Started, listening on: port 80"
+    Tasks: 213 (limit: 22608)
+   Memory: 17.6M
+   CGroup: /system.slice/httpd.service
+           ├─36024 /usr/sbin/httpd -DFOREGROUND
+
+```
+
 
 
 
