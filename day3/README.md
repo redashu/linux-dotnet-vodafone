@@ -196,4 +196,68 @@ success
 
 ```
 
+### understanding dotnet along with httpd / nginx 
+
+<img src="com.png">
+
+### web server 
+
+<img src="webs.png">
+
+### checking existing webapp by apache httpd
+
+```
+[opc@ashu-linux-vm testing]$ rpm -q httpd
+httpd-2.4.37-62.module_el8+657+88b2113f.x86_64
+[opc@ashu-linux-vm testing]$ 
+[opc@ashu-linux-vm testing]$ 
+[opc@ashu-linux-vm testing]$ systemctl status  httpd
+● httpd.service - The Apache HTTP Server
+   Loaded: loaded (/usr/lib/systemd/system/httpd.service; enabled; vendor preset: disabled)
+   Active: active (running) since Wed 2023-12-13 04:41:28 GMT; 2h 5min ago
+     Docs: man:httpd.service(8)
+ Main PID: 1520 (httpd)
+   Status: "Total requests: 132; Idle/Busy workers 100/0;Requests/sec: 0.0176; Bytes served/sec:  10 B/sec"
+    Tasks: 213 (limit: 22608)
+   Memory: 23.0M
+   CGroup: /system.slice/httpd.service
+           ├─1520 /usr/sbin/httpd -DFOREGROUND
+           ├─1702 /usr/sbin/httpd -DFOREGROUND
+           ├─1705 /usr/sbin/httpd -DFOREGROUND
+           ├─1706 /usr/sbin/httpd -DFOREGROUND
+           └─1707 /usr/sbin/httpd -DFOREGROUND
+
+Dec 13 04:41:27 ashu-linux-vm systemd[1]: Starting The Apache HTTP Server...
+Dec 13 04:41:28 ashu-linux-vm systemd[1]: Started The Apache HTTP Server.
+Dec 13 04:41:28 ashu-linux-vm httpd[1520]: Server configured, listening on: port 80
+[opc@ashu-linux-vm testing]$ 
+
+[opc@ashu-linux-vm testing]$ 
+[opc@ashu-linux-vm testing]$ 
+[opc@ashu-linux-vm testing]$ 
+[opc@ashu-linux-vm testing]$ 
+[opc@ashu-linux-vm testing]$ cd  /etc/httpd/
+[opc@ashu-linux-vm httpd]$ ls
+conf  conf.d  conf.modules.d  logs  modules  run  state
+[opc@ashu-linux-vm httpd]$ cd conf.d/
+[opc@ashu-linux-vm conf.d]$ ls
+README  ashu-adhoc.conf  ashu-delvex.conf  autoindex.conf  default.conf  userdir.conf  welcome.conf
+[opc@ashu-linux-vm conf.d]$ cat ashu-adhoc.conf 
+<virtualhost *:80>
+	servername ashu.adhocnet.org
+	documentroot /var/www/adhoc/
+</virtualhost>
+[opc@ashu-linux-vm conf.d]$ cat  ashu-delvex.conf 
+<virtualhost *:80>
+	servername ashu.delvex.io
+	documentroot /var/www/delvex/
+</virtualhost>
+[opc@ashu-linux-vm conf.d]$ 
+
+
+```
+
+### dotnet app using apache httpd 
+
+
 
