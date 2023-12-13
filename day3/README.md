@@ -102,3 +102,74 @@ Hello, World!
 Hello, ashu !
 ```
 
+### lets test with MVC based webapp
+
+```
+  90  dotnet new  mvc -n ashuMVCapp1 -o my-new-projectr
+   91  ls
+   92  ls my-new-projectr/
+   93  history 
+[opc@ashu-linux-vm ashudotnetApp]$ 
+[opc@ashu-linux-vm ashudotnetApp]$ 
+[opc@ashu-linux-vm ashudotnetApp]$ dotnet new  mvc -n ashuMVCapp1 
+The template "ASP.NET Core Web App (Model-View-Controller)" was created successfully.
+This template contains technologies from parties other than Microsoft, see https://aka.ms/aspnetcore/8.0-third-party-notices for details.
+
+Processing post-creation actions...
+Restoring /home/opc/ashudotnetApp/ashuMVCapp1/ashuMVCapp1.csproj:
+  Determining projects to restore...
+  Restored /home/opc/ashudotnetApp/ashuMVCapp1/ashuMVCapp1.csproj (in 174 ms).
+Restore succeeded.
+
+
+[opc@ashu-linux-vm ashudotnetApp]$ ls
+ashuconsoleApp1  ashuMVCapp1  ConsoleApp1  ConsoleApp1.sln  my-new-projectr  WebApplication1
+```
+
+###  for webapp we can build as well
+
+```
+ dotnet  build 
+MSBuild version 17.8.0+6cdef4241 for .NET
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+/usr/lib64/dotnet/sdk/8.0.100-rc.2.23502.1/Sdks/Microsoft.NET.Sdk/targets/Microsoft.NET.RuntimeIdentifierInference.targets(311,5): message NETSDK1057: You are using a preview version of .NET. See: https://aka.ms/dotnet-support-policy [/home/opc/ashudotnetApp/ashuMVCapp1/ashuMVCapp1.csproj]
+  ashuMVCapp1 -> /home/opc/ashudotnetApp/ashuMVCapp1/bin/Debug/net8.0/ashuMVCapp1.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.19
+[opc@ashu-linux-vm ashuMVCapp1]$ ls
+appsettings.Development.json  ashuMVCapp1.csproj  Controllers  obj         Properties  wwwroot
+appsettings.json              bin                 Models       Program.cs  Views
+[opc@ashu-linux-vm ashuMVCapp1]$ ls  bin/
+Debug
+[opc@ashu-linux-vm ashuMVCapp1]$ ls  bin/Debug/net8.0/
+appsettings.Development.json  ashuMVCapp1            ashuMVCapp1.dll  ashuMVCapp1.runtimeconfig.json
+appsettings.json              ashuMVCapp1.deps.json  ashuMVCapp1.pdb  ashuMVCapp1.staticwebassets.runtime.json
+[opc@ashu-linux-vm ashuMVCapp1]$ 
+```
+
+### we can run .dll file directly 
+
+```
+dotnet run bin/Debug/net8.0/ashuMVCapp1.dll
+Building...
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://localhost:5158
+info: Microsoft.Hosting.Lifetime[0]
+```
+
+### running with port number 
+
+```
+  124  dotnet run bin/Debug/net8.0/ashuMVCapp1.dll --urls=http://0.0.0.0:5000
+  125  history 
+[opc@ashu-linux-vm ashuMVCapp1]$ ls
+appsettings.Development.json  ashuMVCapp1.csproj  Controllers  obj         Properties  wwwroot
+appsettings.json              bin                 Models       Program.cs  Views
+[opc@ashu-linux-vm ashuMVCapp1]$ 
+```
+
