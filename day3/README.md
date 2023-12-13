@@ -502,3 +502,26 @@ sudo setenforce 0
 ```
 
 
+### checking access logs
+
+```
+[opc@ashu-linux-vm system]$ cd  /var/log/
+[opc@ashu-linux-vm log]$ ls
+audit              btmp                   cloud-init.log   dnf.log      hawkey.log  lastlog   oracle-cloud-agent  samba    sssd
+boot.log           chrony                 cron             dnf.rpm.log  httpd       maillog   private             secure   tuned
+boot.log-20231213  cloud-init-output.log  dnf.librepo.log  firewalld    kdump.log   messages  qemu-ga             spooler  wtmp
+[opc@ashu-linux-vm log]$ ls httpd/
+ls: cannot open directory 'httpd/': Permission denied
+[opc@ashu-linux-vm log]$ 
+[opc@ashu-linux-vm log]$ sudo ls httpd/
+access_log  ashuapp_access.log	ashuapp_error.log  error_log
+[opc@ashu-linux-vm log]$ 
+[opc@ashu-linux-vm log]$ 
+[opc@ashu-linux-vm log]$ sudo cat  httpd/ashuapp_access.log
+172.70.242.162 - - [13/Dec/2023:07:55:23 +0000] "GET / HTTP/1.1" 200 2513 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+172.70.243.191 - - [13/Dec/2023:07:55:54 +0000] "GET / HTTP/1.1" 200 2513 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+172.70.243.191 - - [13/Dec/2023:07:55:56 +0000] "GET / HTTP/1.1" 200 2513 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+172.70.243.191 - - [13/Dec/2023:07:55:57 +0000] "GET / HTTP/1.1" 200 2513 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+162.158.110.151 - - [13/Dec/2023:09:45:08 +0000] "GET
+```
+
