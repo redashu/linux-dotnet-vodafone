@@ -370,5 +370,10 @@ info: Microsoft.Hosting.Lifetime[0]
 </virtualhost>
 ```
 
+## final understanding of systemd with dotnet 
+
+<img src="systemd.png">
+
+
 
 
