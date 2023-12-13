@@ -433,4 +433,72 @@ access_log  ashuapp_access.log	ashuapp_error.log  error_log
 
 ```
 
+### creating systemd file for dotnet core app
+
+```
+ cd /etc/systemd/system/
+[opc@ashu-linux-vm system]$ ls
+ ====>>>
+ sudo vim  ashuapp.service
+
+cat ashuapp.service 
+[Unit]
+Description=ashu ASP.NET Core Application
+
+[Service]
+WorkingDirectory=/var/www/delvex/publish/
+ExecStart=/var/www/delvex/publish/ashuMVCapp1  --urls=http://localhost:5001
+Restart=always
+RestartSec=10
+SyslogIdentifier=your-app
+User=opc
+Environment=ASPNETCORE_ENVIRONMENT=Production
+
+[Install]
+WantedBy=multi-user.target
+
+                       
+```
+
+### starting service
+
+```
+[opc@ashu-linux-vm system]$ ls
+ ashuapp.service                                            iscsid.service.d
+ basic.target.wants                                         multi-user.target.wants
+ cloud-init.target.wants                                    network-online.target.wants
+ ctrl-alt-del.target                                        oracle-cloud-agent-updater.service
+ dbus-org.fedoraproject.FirewallD1.service                  oracle-cloud-agent.service
+ dbus-org.freedesktop.nm-dispatcher.service                 remote-fs.target.wants
+ dbus-org.freedesktop.timedate1.service                     sockets.target.wants
+ default.target                                             sshd-keygen@.service.d
+ default.target.wants                                       sysinit.target.wants
+'dev-virtio\x2dports-org.qemu.guest_agent.0.device.wants'   syslog.service
+ getty.target.wants                                         systemd-timedated.service
+ graphical.target.wants                                     timers.target.wants
+
+
+[opc@ashu-linux-vm system]$ sudo systemctl daemon-reload 
+[opc@ashu-linux-vm system]$ sudo systemctl start  ashuapp
+
+
+[opc@ashu-linux-vm system]$ sudo systemctl status  ashuapp 
+● ashuapp.service - ashu ASP.NET Core Application
+   Loaded: loaded (/etc/systemd/system/ashuapp.service; disabled; vendor preset: disabled)
+   Active: active (running) since Wed 2023-12-13 07:53:06 GMT; 1h 50min ago
+ Main PID: 11872 (ashuMVCapp1)
+    Tasks: 15 (limit: 22608)
+   Memory: 31.8M
+   CGroup: /system.slice/ashuapp.service
+           └─11872 /var/www/delvex/publish/ashuMVCapp1 --urls=http://localhost:5001
+
+
+```
+
+### check with security 
+
+```
+sudo setenforce 0
+```
+
 
