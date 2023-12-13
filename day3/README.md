@@ -330,5 +330,45 @@ index.html  publish
 
 ### Note: publish directory is outcome of dotnet publish 
 
+### verify publish folder data
+
+```
+[opc@ashu-linux-vm delvex]$ ls
+index.html  publish
+[opc@ashu-linux-vm delvex]$ cd  publish/
+[opc@ashu-linux-vm publish]$ ls
+appsettings.Development.json  ashuMVCapp1            ashuMVCapp1.dll  ashuMVCapp1.runtimeconfig.json  wwwroot
+appsettings.json              ashuMVCapp1.deps.json  ashuMVCapp1.pdb  web.config
+
+
+
+[opc@ashu-linux-vm publish]$ dotnet   ashuMVCapp1.dll 
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://localhost:5000
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /var/www/delvex/publish
+^Cinfo: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+[opc@ashu-linux-vm publish]$ 
+
+```
+
+### adjusting in apache vhostfile
+
+```
+<virtualhost *:80>
+#  we wanto run dotnet app using this vhost 
+	servername ashu.delvex.io
+	documentroot /var/www/delvex/publish/
+#  apache httpd can redirect / proxy traffice to dotnet generated local URL 
+	ProxyPass /  http://localhost:5000/
+	ProxyPassReverse / http://localhost:5000/
+</virtualhost>
+```
+
 
 
