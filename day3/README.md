@@ -257,7 +257,78 @@ README  ashu-adhoc.conf  ashu-delvex.conf  autoindex.conf  default.conf  userdir
 
 ```
 
-### dotnet app using apache httpd 
+## dotnet app using apache httpd 
+
+### making a publish release of dotnet app
+
+```
+ dotnet publish 
+MSBuild version 17.8.0+6cdef4241 for .NET
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+/usr/lib64/dotnet/sdk/8.0.100-rc.2.23502.1/Sdks/Microsoft.NET.Sdk/targets/Microsoft.NET.RuntimeIdentifierInference.targets(311,5): message NETSDK1057: You are using a preview version of .NET. See: https://aka.ms/dotnet-support-policy [/home/opc/ashudotnetApp/ashuMVCapp1/ashuMVCapp1.csproj]
+  ashuMVCapp1 -> /home/opc/ashudotnetApp/ashuMVCapp1/bin/Release/net8.0/ashuMVCapp1.dll
+  ashuMVCapp1 -> /home/opc/ashudotnetApp/ashuMVCapp1/bin/Release/net8.0/publish/
+[opc@ashu-linux-vm ashuMVCapp1]$ ls
+appsettings.Development.json  ashuMVCapp1.csproj  Controllers  obj         Properties  wwwroot
+appsettings.json              bin                 Models       Program.cs  Views
+[opc@ashu-linux-vm ashuMVCapp1]$ cd bin/
+[opc@ashu-linux-vm bin]$ ls
+Debug  Release
+[opc@ashu-linux-vm bin]$ cd Release/
+[opc@ashu-linux-vm Release]$ ls
+net8.0
+[opc@ashu-linux-vm Release]$ cd net8.0/
+[opc@ashu-linux-vm net8.0]$ ls
+appsettings.Development.json  ashuMVCapp1.deps.json  ashuMVCapp1.runtimeconfig.json
+appsettings.json              ashuMVCapp1.dll        ashuMVCapp1.staticwebassets.runtime.json
+ashuMVCapp1                   ashuMVCapp1.pdb        publish
+[opc@ashu-linux-vm net8.0]$ cd publish/
+[opc@ashu-linux-vm publish]$ ls
+appsettings.Development.json  ashuMVCapp1            ashuMVCapp1.dll  ashuMVCapp1.runtimeconfig.json  wwwroot
+appsettings.json              ashuMVCapp1.deps.json  ashuMVCapp1.pdb  web.config
+[opc@ashu-linux-vm publish]$ 
+```
+
+### copy publish folder to vhost location of apache httpd 
+
+```
+sudo cp -rf publish/ /var/www/delvex/
+```
+
+## finally 
+
+### apache httpd with dotnet publish content
+
+```
+====>>
+cd  /etc/httpd/
+[opc@ashu-linux-vm httpd]$ ls
+conf  conf.d  conf.modules.d  logs  modules  run  state
+
+[opc@ashu-linux-vm httpd]$ cd conf.d/
+
+[opc@ashu-linux-vm conf.d]$ ls
+README  ashu-adhoc.conf  ashu-delvex.conf  autoindex.conf  default.conf  userdir.conf  welcome.conf
+
+[opc@ashu-linux-vm conf.d]$ cat  ashu-delvex.conf 
+<virtualhost *:80>
+#  we wanto run dotnet app using this vhost 
+	servername ashu.delvex.io
+	documentroot /var/www/delvex/
+</virtualhost>
+[opc@ashu-linux-vm conf.d]$ 
+
+
+===========>>>
+
+ cd  /var/www/delvex/
+[opc@ashu-linux-vm delvex]$ ls
+index.html  publish
+
+```
+
+### Note: publish directory is outcome of dotnet publish 
 
 
 
