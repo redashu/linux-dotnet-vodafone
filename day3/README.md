@@ -525,3 +525,87 @@ access_log  ashuapp_access.log	ashuapp_error.log  error_log
 162.158.110.151 - - [13/Dec/2023:09:45:08 +0000] "GET
 ```
 
+### Problme with VM concept 
+
+<img src="prob1.png">
+
+## Introduction to containers 
+
+<img src="cont.png">
+
+### Introduction to Docker 
+
+<img src="docker.png">
+
+### installation platform supprt of docker in linux / windows 
+
+<img src="support.png">
+
+### Installing docker on centos/rhel 7 
+
+```
+yum install docker  -y
+Failed to set locale, defaulting to C
+Loaded plugins: extras_suggestions, langpacks, priorities, update-motd
+Resolving Dependencies
+
+```
+
+### starting docker 
+
+```
+sudo systemctl start docker
+[root@docker-server ~]# sudo systemctl status docker
+sudo systemctl enable  docker
+```
+
+## lets get started with docker 
+
+### verify installation 
+
+```
+rpm -q docker 
+docker-20.10.25-1.amzn2.0.3.x86_64
+[ashu@docker-server ~]$ rpm -qi  docker 
+Name        : docker
+Version     : 20.10.25
+
+```
+## lets run docker instruction 
+
+### checking docker version 
+
+```
+docker  version 
+Client:
+ Version:           20.10.25
+ API version:       1.41
+ Go version:        go1.20.10
+ Git commit:        b82b9f3
+ Built:             Fri Oct 13 22:46:12 2023
+ OS/Arch:           linux/amd64
+ Context:           default
+ Experimental:      true
+
+Server:
+ Engine:
+  Version:          20.10.25
+  API version:      1.41 (minimum version 1.12)
+  Go version:       go1.20.10
+  Git commit:       5df983c
+  Built:            Fri Oct 13 22:46:59 2023
+  OS/Arch:          linux/amd64
+  Experimental:     false
+ containerd:
+  Version:          1.7.2
+  GitCommit:        0cae528dd6cb557f7201036e9f43420650207b58
+ runc:
+  Version:          1.1.7
+  GitCommit:        f19387a6bec4944c770f7668ab51c4348d9c2f38
+ docker-init:
+  Version:          0.19.0
+  GitCommit:        de40ad0
+
+```
+
+
