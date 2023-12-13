@@ -173,3 +173,27 @@ appsettings.json              bin                 Models       Program.cs  Views
 [opc@ashu-linux-vm ashuMVCapp1]$ 
 ```
 
+### firewall-cmd with reload optins
+
+```
+sudo firewall-cmd --reload 
+success
+[opc@ashu-linux-vm testing]$ sudo firewall-cmd --add-port=3000/tcp --permanent 
+success
+[opc@ashu-linux-vm testing]$ 
+[opc@ashu-linux-vm testing]$ 
+[opc@ashu-linux-vm testing]$ sudo firewall-cmd --list-ports 
+80/tcp 5005/tcp
+[opc@ashu-linux-vm testing]$ 
+[opc@ashu-linux-vm testing]$ 
+[opc@ashu-linux-vm testing]$ sudo firewall-cmd --reload 
+success
+[opc@ashu-linux-vm testing]$ 
+[opc@ashu-linux-vm testing]$ sudo firewall-cmd --list-ports 
+80/tcp 3000/tcp 5005/tcp
+[opc@ashu-linux-vm testing]$ 
+
+
+```
+
+
