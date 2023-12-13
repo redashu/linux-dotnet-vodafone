@@ -374,6 +374,63 @@ info: Microsoft.Hosting.Lifetime[0]
 
 <img src="systemd.png">
 
+### Final understanding of dotnet app in linux 
 
+<img src="finald.png">
+
+### logs in httpd 
+
+```
+@ashu-linux-vm ~]$ 
+[opc@ashu-linux-vm ~]$ cd /var/log/
+[opc@ashu-linux-vm log]$ ls
+audit              btmp                   cloud-init.log   dnf.log      hawkey.log  lastlog   oracle-cloud-agent  samba    sssd
+boot.log           chrony                 cron             dnf.rpm.log  httpd       maillog   private             secure   tuned
+boot.log-20231213  cloud-init-output.log  dnf.librepo.log  firewalld    kdump.log   messages  qemu-ga             spooler  wtmp
+[opc@ashu-linux-vm log]$ cd  httpd/
+```
+
+### logs in linux 
+
+```
+/var/log/
+```
+
+### custom logs configuration in dotnet app
+
+```
+ cd  /etc/httpd/conf.d/
+[opc@ashu-linux-vm conf.d]$ ls
+README  ashu-adhoc.conf  ashu-delvex.conf  autoindex.conf  default.conf  userdir.conf  welcome.conf
+[opc@ashu-linux-vm conf.d]$ sudo vim ashu-delvex.conf 
+[opc@ashu-linux-vm conf.d]$ cat  ashu-delvex.conf 
+<virtualhost *:80>
+#  we wanto run dotnet app using this vhost 
+	servername ashu.delvex.io
+	documentroot /var/www/delvex/publish/
+#  apache httpd can redirect / proxy traffice to dotnet generated local URL 
+	ProxyPass /  http://localhost:5001/
+	ProxyPassReverse / http://localhost:5001/
+	ErrorLog /var/log/httpd/ashuapp_error.log
+ 	CustomLog /var/log/httpd/ashuapp_access.log combined
+</virtualhost>
+
+[opc@ashu-linux-vm conf.d]$ sudo systemctl restart httpd
+[opc@ashu-linux-vm conf.d]$
+
+[opc@ashu-linux-vm conf.d]$ cd  /var/log/
+[opc@ashu-linux-vm log]$ ls
+audit              btmp                   cloud-init.log   dnf.log      hawkey.log  lastlog   oracle-cloud-agent  samba    sssd
+boot.log           chrony                 cron             dnf.rpm.log  httpd       maillog   private             secure   tuned
+boot.log-20231213  cloud-init-output.log  dnf.librepo.log  firewalld    kdump.log   messages  qemu-ga             spooler  wtmp
+
+
+[opc@ashu-linux-vm log]$ sudo ls  httpd/
+access_log  ashuapp_access.log	ashuapp_error.log  error_log
+[opc@ashu-linux-vm log]$ 
+
+
+
+```
 
 
