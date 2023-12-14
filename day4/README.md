@@ -261,3 +261,9 @@ exit
 
 ```
 
+### pushing image to registry / artifacts
+
+<img src="push.png">
+
+
+
