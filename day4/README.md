@@ -265,5 +265,53 @@ exit
 
 <img src="push.png">
 
+### image push to docker hub -- Image name format 
+
+<img src="imgf.png">
+
+## steps to push image to docker hub 
+
+### change image name to docker hub format 
+
+```
+[ashu@docker-server ashu-docker-apps]$ docker  images
+REPOSITORY       TAG       IMAGE ID       CREATED             SIZE
+poojadotnet      appv1     e824556a0b47   About an hour ago   926MB
+madhuridotnet    appv1     28c214b19249   2 hours ago         926MB
+anujdotnetapp1   appv1     108030db1619   2 hours ago         926MB
+shaileshdotnet   appv1     d291799707de   2 hours ago         926MB
+vijaydotnet      appv1     a6f26e51386e   2 hours ago         926MB
+<none>           <none>    d32441783b9f   2 hours ago         926MB
+ashudotnet       appv1     3ffb20e60a06   2 hours ago         926MB
+redhat/ubi8      latest    86b358a425da   6 weeks ago         205MB
+[ashu@docker-server ashu-docker-apps]$ 
+[ashu@docker-server ashu-docker-apps]$ 
+[ashu@docker-server ashu-docker-apps]$ docker  tag   ashudotnet:appv1    docker.io/dockerashu/ashudotnet:version1 
+[ashu@docker-server ashu-docker-apps]$ 
+
+
+```
+
+### login to docker hub account from docker server 
+
+```
+docker  login 
+Login with your Docker ID to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com to create one.
+Username: dockerashu
+Password: 
+WARNING! Your password will be stored unencrypted in /home/ashu/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+```
+
+### pushing image
+
+```
+ashu@docker-server ashu-docker-apps]$ docker  push  docker.io/dockerashu/ashudotnet:version1 
+The push refers to repository [docker.io/dockerashu/ashudotnet]
+ab88a3ddab78: Pushed 
+```
 
 
