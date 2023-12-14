@@ -314,4 +314,9 @@ The push refers to repository [docker.io/dockerashu/ashudotnet]
 ab88a3ddab78: Pushed 
 ```
 
+### making process of automation for docker steps 
+
+<img src="auto1.png">
+
+
 
