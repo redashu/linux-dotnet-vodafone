@@ -81,3 +81,21 @@ redhat/ubi8          latest    86b358a425da   6 weeks ago     205MB
 openjdk              latest    71260f256d19   10 months ago   470MB
 ```
 
+### Creating first container 
+
+```
+[ashu@docker-server ~]$ docker  run   --name  ashuc1  -it -d  redhat/ubi8:latest    
+d0c6c7de102d2274620db8189ab4635d32bf58dd193e6421d0834246c9bbb26c
+
+=====>>  to list all the running containers
+
+[ashu@docker-server ~]$ docker   ps
+CONTAINER ID   IMAGE                COMMAND       CREATED         STATUS         PORTS     NAMES
+d0c6c7de102d   redhat/ubi8:latest   "/bin/bash"   8 seconds ago   Up 7 seconds             ashuc1
+[ashu@docker-server ~]$ 
+
+```
+
+
+
+
