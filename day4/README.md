@@ -319,4 +319,8 @@ ab88a3ddab78: Pushed
 <img src="auto1.png">
 
 
+### Creaitng jobs in jenkins 
+
+<img src="jobs.png">
+
 
