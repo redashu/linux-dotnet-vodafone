@@ -199,4 +199,65 @@ info: Microsoft.Hosting.Lifetime[0]
       Content root path: /ashuapp
 ```
 
+### access container from docker server (linux machine )---
+
+```
+====>> LInux server 
+ashu@docker-server ~]$ whoami
+ashu
+[ashu@docker-server ~]$ cat  /etc/os-release 
+NAME="Amazon Linux"
+VERSION="2"
+ID="amzn"
+ID_LIKE="centos rhel fedora"
+VERSION_ID="2"
+PRETTY_NAME="Amazon Linux 2"
+ANSI_COLOR="0;33"
+CPE_NAME="cpe:2.3:o:amazon:amazon_linux:2"
+HOME_URL="https://amazonlinux.com/"
+SUPPORT_END="2025-06-30"
+
+====>> checking container listing 
+[ashu@docker-server ~]$ 
+[ashu@docker-server ~]$ 
+[ashu@docker-server ~]$ docker  ps
+CONTAINER ID   IMAGE                  COMMAND                  CREATED          STATUS          PORTS     NAMES
+69991f429725   vijaydotnet:appv1      "/bin/sh -c './vijay…"   4 minutes ago    Up 4 minutes              vijayapp
+adb918690143   anujdotnetapp1:appv1   "/bin/sh -c './anuja…"   5 minutes ago    Up 5 minutes              anujapp
+e1531fd8f3e8   madhuridotnet:appv1    "/bin/sh -c './madhu…"   7 minutes ago    Up 7 minutes              madhuriapp
+2786c9f8914a   ashudotnet:appv1       "/bin/sh -c './ashub…"   10 minutes ago   Up 10 minutes             ashuapp
+[ashu@docker-server ~]$
+
+
+====>>> accessing container
+
+[ashu@docker-server ~]$ docker   exec -it  ashuapp bash 
+[root@2786c9f8914a ashuapp]# 
+[root@2786c9f8914a ashuapp]# 
+[root@2786c9f8914a ashuapp]# whoami
+root
+[root@2786c9f8914a ashuapp]# cat  /etc/os-release 
+NAME="Red Hat Enterprise Linux"
+VERSION="8.9 (Ootpa)"
+ID="rhel"
+ID_LIKE="fedora"
+VERSION_ID="8.9"
+PLATFORM_ID="platform:el8"
+PRETTY_NAME="Red Hat Enterprise Linux 8.9 (Ootpa)"
+ANSI_COLOR="0;31"
+CPE_NAME="cpe:/o:redhat:enterprise_linux:8::baseos"
+HOME_URL="https://www.redhat.com/"
+DOCUMENTATION_URL="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8"
+BUG_REPORT_URL="https://bugzilla.redhat.com/"
+
+REDHAT_BUGZILLA_PRODUCT="Red Hat Enterprise Linux 8"
+REDHAT_BUGZILLA_PRODUCT_VERSION=8.9
+REDHAT_SUPPORT_PRODUCT="Red Hat Enterprise Linux"
+REDHAT_SUPPORT_PRODUCT_VERSION="8.9"
+
+====>> exiting from container 
+[root@2786c9f8914a ashuapp]# exit
+exit
+
+```
 
