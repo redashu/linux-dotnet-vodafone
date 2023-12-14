@@ -323,4 +323,10 @@ ab88a3ddab78: Pushed
 
 <img src="jobs.png">
 
+### giving permission to jenkisn for docker access
+
+```
+chmod 777 /var/run/docker.sock 
+```
+
 
