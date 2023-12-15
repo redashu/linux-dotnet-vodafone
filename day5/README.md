@@ -129,4 +129,80 @@ ashuc1    ashudotnetimg:v1   "/bin/sh -c './ashu_…"   ashuapp1   10 seconds ag
 
 ```
 
+### creating dockerfile for apache httpd and adding virtualhost config also 
+
+### dockerfile
+
+```
+FROM redhat/ubi8  
+LABEL name="ashutoshh"
+LABEL email="ashutoshh@linux.com"
+# label is optional but to share image owner details to users 
+RUN dnf install httpd -y 
+COPY  dotnet-vhost.conf  /etc/httpd/conf.d/dotnet.conf 
+#CMD systemctl start httpd
+ENTRYPOINT  httpd -DFOREGROUND 
+# Replace of cmd and better than cmd 
+```
+
+### vhostfile
+
+```
+<virtualhost *:80>
+    servername localhost
+    ProxyPass /  http://ashuc1:5000/
+	ProxyPassReverse / http://ashuc1:5000/
+</virtualhost>
+```
+
+### adding things in docker-compose.yaml
+
+```
+version: '3.8' 
+services: # apps containers you want to build and run
+  ashuapp1: # name of appliction for compose 
+    image: ashudotnetimg:v1  # image i want to build 
+    build: .  # path of dockerfile location -- . means current 
+    container_name: ashuc1 # it will create container also 
+  ashuapp2: 
+    image: ashuhttpd:v1 
+    build: 
+      context: . #location of dockerfile 
+      dockerfile: httpd.dockerfile # name of dockerfile 
+    container_name: ashuc2 
+    ports:
+      - 1234:80  
+  
+
+```
+
+### running compose 
+
+```
+ashu@docker-server ashu-docker-apps]$ docker-compose down
+[+] Running 2/2
+ ✔ Container ashuc1                  Removed                                                                         0.3s 
+ ✔ Network ashu-docker-apps_default  Removed                                                                         0.1s 
+[ashu@docker-server ashu-docker-apps]$ docker-compose up -d --build 
+[+] Building 10.9s (17/17) FINISHED                                                                        docker:default
+ => [ashuapp1 internal] load build definition from Dockerfile                                                        0.0s
+ => => transferring dockerfile: 32B                                                                                  0.0s
+ => [ashuapp2 internal] load build definition from httpd.dockerfile                                                  0.0s
+ => => transferring dockerfile: 362B                                                                                 0.0s
+ => [ashuapp2 internal] load .dockerignore                                                                           0.0s
+ => => transferring context: 2B                                                                                      0.0s
+ => [ashuapp1 internal] load .dockerignore                                                                           0.0s
+ => => transferring context: 2B             
+```
+
+### checking it
+
+```
+[ashu@docker-server ashu-docker-apps]$ docker-compose  ps
+NAME      IMAGE              COMMAND                  SERVICE    CREATED          STATUS          PORTS
+ashuc1    ashudotnetimg:v1   "/bin/sh -c './ashu_…"   ashuapp1   24 seconds ago   Up 23 seconds   
+ashuc2    ashuhttpd:v1       "/bin/sh -c 'httpd -…"   ashuapp2   24 seconds ago   Up 23 seconds   0.0.0.0:1234->80/tcp, :::1234->80/tcp
+```
+
+
 
