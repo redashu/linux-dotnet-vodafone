@@ -242,6 +242,19 @@ ashuc2              ashuhttpd:v1        "/bin/sh -c 'httpd -…"   ashuapp2     
 
 ```
 
+## Introduction to k8s 
+
+<img src="k8s.png">
+
+### k8s infra 1 
+
+<img src="infra1.png">
+
+### k8s setup 
+
+<img src="k8s_setup.png">
+
+
 
 
 
