@@ -259,6 +259,74 @@ ashuc2              ashuhttpd:v1        "/bin/sh -c 'httpd -…"   ashuapp2     
 <img src="intro.png">
 
 
+### jenkinsfile to docker compsoe build
+
+```
+pipeline {
+    agent any
+
+    stages {
+        // job1 pulling code changes
+        stage('code pull stage') { 
+            steps {
+                echo 'Hello i am pulling code changes from github'
+                // cloning git repo using groovy script 
+                git 'https://github.com/redashu/ashu-customer1-app.git'
+                // checking code data
+                sh 'ls'
+            }
+        }
+        // job2 testing docker connection with jenkinsfile 
+        stage('testing docker connection'){
+            steps {
+                echo 'lets test docker connection'
+                sh 'docker version'
+            }
+        }
+        // job3 running docker compose file
+        stage('running docker compsoe file'){
+            steps {
+                echo 'lets run docker-compsoe file'
+                sh 'docker-compose down'
+                sh 'docker-compose up -d --build'
+                sh 'sleep 3' // wait time 3 seconds 
+                sh 'docker-compose ps'
+            }
+        }
+    }
+}
+
+```
+
+## back to K8s 
+
+### Installing  kubectl in linux 
+
+[click_here](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)
+
+### verify after install
+
+```
+kubectl  version --client 
+Client Version: v1.29.0
+Kustomize Version: v5.0.4-0.20230601165947-6ce0bf390ce3
+[ashu@docker-server ashu-docker-apps]$
+
+```
+
+### I download oke cred from oke cloud shell to linux server under /tmp/oke.config
+
+### taking from there to personal user
+
+```
+  ^C
+[ashu@docker-server ashu-docker-apps]$ mkdir  ~/.kube  
+[ashu@docker-server ashu-docker-apps]$ 
+[ashu@docker-server ashu-docker-apps]$ cp -v  /tmp/oke.config    ~/.kube/config 
+‘/tmp/oke.config’ -> ‘/home/ashu/.kube/config’
+[ashu@docker-server ashu-docker-apps]$ 
+[ashu@docker-server ashu-docker-apps]$ 
+```
 
 
 
