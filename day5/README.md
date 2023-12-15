@@ -204,5 +204,44 @@ ashuc1    ashudotnetimg:v1   "/bin/sh -c './ashu_…"   ashuapp1   24 seconds ag
 ashuc2    ashuhttpd:v1       "/bin/sh -c 'httpd -…"   ashuapp2   24 seconds ago   Up 23 seconds   0.0.0.0:1234->80/tcp, :::1234->80/tcp
 ```
 
+### more docker-compose commands
+
+```
+ashu-customer1-app git:(master) docker-compose down
+[+] Running 3/2
+ ✔ Container ashuc1                    Removed                                                                                                          0.4s 
+ ✔ Container ashuc2                    Removed                                                                                                          0.4s 
+ ✔ Network ashu-customer1-app_default  Removed                                                                                                          0.0s 
+➜  ashu-customer1-app git:(master) docker-compose up -d
+[+] Building 0.0s (0/0)                                                                                                                                      
+[+] Running 3/3
+ ✔ Network ashu-customer1-app_default  Created                                                                                                          0.0s 
+ ✔ Container ashuc1                    Started                                                                                                          0.4s 
+ ✔ Container ashuc2                    Started                                                                                                          0.4s 
+➜  ashu-customer1-app git:(master) docker-compose ps   
+NAME                IMAGE               COMMAND                  SERVICE             CREATED             STATUS              PORTS
+ashuc1              ashudotnetimg:v1    "/bin/sh -c './ashu_…"   ashuapp1            3 seconds ago       Up 2 seconds        
+ashuc2              ashuhttpd:v1        "/bin/sh -c 'httpd -…"   ashuapp2            3 seconds ago       Up 2 seconds        0.0.0.0:1234->80/tcp
+➜  ashu-customer1-app git:(master) docker-compose stop 
+[+] Stopping 2/2
+ ✔ Container ashuc1  Stopped                                                                                                                            0.2s 
+ ✔ Container ashuc2  Stopped                                                                                                                            0.2s 
+➜  ashu-customer1-app git:(master) docker-compose ps -a
+NAME                IMAGE               COMMAND                  SERVICE             CREATED             STATUS                     PORTS
+ashuc1              ashudotnetimg:v1    "/bin/sh -c './ashu_…"   ashuapp1            12 seconds ago      Exited (0) 2 seconds ago   
+ashuc2              ashuhttpd:v1        "/bin/sh -c 'httpd -…"   ashuapp2            12 seconds ago      Exited (0) 2 seconds ago   
+➜  ashu-customer1-app git:(master) docker-compose start
+[+] Running 2/2
+ ✔ Container ashuc2  Started                                                                                                                            0.5s 
+ ✔ Container ashuc1  Started                                                                                                                            0.5s 
+➜  ashu-customer1-app git:(master) docker-compose ps   
+NAME                IMAGE               COMMAND                  SERVICE             CREATED             STATUS              PORTS
+ashuc1              ashudotnetimg:v1    "/bin/sh -c './ashu_…"   ashuapp1            19 seconds ago      Up 2 seconds        
+ashuc2              ashuhttpd:v1        "/bin/sh -c 'httpd -…"   ashuapp2            19 seconds ago      Up 2 seconds        0.0.0.0:1234->80/tcp
+➜  ashu-customer1-app git:(master) 
+
+```
+
+
 
 
