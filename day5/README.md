@@ -254,6 +254,10 @@ ashuc2              ashuhttpd:v1        "/bin/sh -c 'httpd -…"   ashuapp2     
 
 <img src="k8s_setup.png">
 
+### jenkinsfile introduction 
+
+<img src="intro.png">
+
 
 
 
