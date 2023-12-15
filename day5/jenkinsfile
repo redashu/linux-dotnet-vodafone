@@ -1,0 +1,23 @@
+pipeline {
+    agent any
+
+    stages {
+        // job1 pulling code changes
+        stage('code pull stage') { 
+            steps {
+                echo 'Hello i am pulling code changes from github'
+                // cloning git repo using groovy script 
+                git 'https://github.com/redashu/ashu-customer1-app.git'
+                // checking code data
+                sh 'ls'
+            }
+        }
+        // job2 testing docker connection with jenkinsfile 
+        stage('testing docker connection'){
+            steps {
+                echo 'lets test docker connection'
+                sh 'docker version'
+            }
+        }
+    }
+}
