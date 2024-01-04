@@ -136,3 +136,66 @@ ashuc1    ashudotnetimg:v1     "/bin/sh -c './ashu_…"   ashuapp1   10 seconds 
 ashuc2    ashuhttpd:version1   "/bin/sh -c 'httpd -…"   ashuapp2   10 seconds ago   Up 8 seconds   0.0.0.0:1234->80/tcp, :::1234->80/tcp
 [ashu@ip-172-31-87-20 ashu-customer1-app]$ 
 ```
+
+
+### executing same thing with jenkins for automated build and test
+
+## jenkinsfile -- test case 1
+
+```
+pipeline {
+    agent any
+
+    stages {
+        stage('taking source code from github') {
+            steps {
+                echo 'cloning source code to jenkins server'
+                git 'https://github.com/redashu/ashu-customer1-app.git'
+                // running linux command 
+                sh 'ls'
+            }
+        }
+    }
+}
+
+```
+
+### testing docker with jenkins 
+
+```
+pipeline {
+    agent any
+
+    stages {
+        stage('taking source code from github') {
+            steps {
+                echo 'cloning source code to jenkins server'
+                git 'https://github.com/redashu/ashu-customer1-app.git'
+                // running linux command 
+                sh 'ls'
+            }
+        }
+        // stage for checking jenkins connection with docker 
+        stage('testing docker connection from jenkins'){
+            steps {
+                echo 'lets check docker with jenkins'
+                sh 'docker version'
+                sh 'docker-compose version'
+            }
+        }
+    }
+}
+
+```
+
+### Note: if jenkins and docker is running in same system 
+
+```
+ usermod -aG docker jenkins
+```
+
+### if still not connecting -- as backup plan 
+
+```
+chmod 777 /var/run/docker.sock 
+```
