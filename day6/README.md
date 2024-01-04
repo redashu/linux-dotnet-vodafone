@@ -291,3 +291,90 @@ pipeline {
 
 ```
 
+### adding jenkins stage to push image and remove apps
+
+```
+pipeline {
+    agent any
+
+    stages {
+        stage('taking source code from github') {
+            steps {
+                echo 'cloning source code to jenkins server'
+                git 'https://github.com/redashu/ashu-customer1-app.git'
+                // running linux command 
+                sh 'ls'
+            }
+        }
+        // stage for checking jenkins connection with docker 
+        stage('testing docker connection from jenkins'){
+            steps {
+                echo 'lets check docker with jenkins'
+                sh 'docker version'
+                sh 'docker-compose version'
+            }
+        }
+        // running compose file to build images and create container 
+        stage('running docker-compose file'){
+            steps {
+                echo 'running compose'
+                sh 'docker-compose down'
+                sh 'docker-compose up -d --build'
+                sh 'docker-compose ps'
+                sh 'docker-compose images'
+            }
+        }
+        // app access stage for dotnet container 
+        stage('dotnet app test'){
+            steps {
+                echo 'using curl tool to access container1 app'
+                sh 'curl -f http://localhost:1122'
+            }
+        }
+        // httpd webserver testing 
+        stage('httpd container app test'){
+            steps {
+                echo 'using curl again'
+                sh 'curl -f http://localhost:1234'
+            }
+        }
+        // clean app 
+        stage('cleaning app'){
+            steps {
+                echo 'cleaing app '
+                sh 'docker-compose down'
+            }
+        }
+        // push image to docker hub we have to rebuild image into format of docker HUB 
+        stage('rebuild in dockerhub format and push it'){
+            steps {
+                echo 'rebuilding image in format of dockerhub'
+                script {
+                    def imageName1 = "dockerashu/ashudotnetapp"
+                    def imageTag1 = "version$BUILD_NUMBER"
+                    
+                    def imageName2 = "dockerashu/ashudotnethttpd"
+                    def imageTag2 = "version$BUILD_NUMBER"
+                    def ashuDockerCred = "0841b683-e87b-4a1b-ac00-b423f2083388"
+                    // building both images
+                    docker.build(imageName1 + ":" + imageTag1 , "-f Dockerfile .")
+                    sh 'sleep 2'
+                    docker.build(imageName2 + ":" + imageTag2 , "-f httpd.dockerfile .")
+                    // pushing both the images to docker hub
+                    docker.withRegistry('https://registry.hub.docker.com',ashuDockerCred){
+                        docker.image(imageName1 + ":" + imageTag1).push()
+                    }
+                    sh 'sleep 2'
+                    // pushing second image
+                    docker.withRegistry('https://registry.hub.docker.com',ashuDockerCred){
+                        docker.image(imageName2 + ":" + imageTag2).push()
+                    }
+                    
+                }
+                
+            }
+        }
+    }
+}
+
+```
