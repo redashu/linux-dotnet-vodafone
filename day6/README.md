@@ -83,3 +83,56 @@ CONTAINER           REPOSITORY          TAG                 IMAGE ID            
 ashuc1              ashudotnetimg       v1                  03343783a7bf        934MB
 ```
 
+### after adding dotnet and httpd container lets test it 
+
+```
+[ashu@ip-172-31-87-20 ashu-customer1-app]$ docker-compose  down 
+[+] Running 2/2
+ ✔ Container ashuc1                    Removed                                                                       0.2s 
+ ✔ Network ashu-customer1-app_default  Removed
+
+
+====>>>                                                                  0.1s 
+[ashu@ip-172-31-87-20 ashu-customer1-app]$ docker-compose up -d --build 
+[+] Building 0.5s (17/17) FINISHED                                                                         docker:default
+ => [ashuapp1 internal] load build definition from Dockerfile                                                        0.0s
+ => => transferring dockerfile: 32B                                                                                  0.0s
+ => [ashuapp1 internal] load .dockerignore                                                                           0.0s
+ => => transferring context: 2B                                                                                      0.0s
+ => [ashuapp2 internal] load metadata for docker.io/redhat/ubi8:latest                                               0.2s
+ => [ashuapp2 1/3] FROM docker.io/redhat/ubi8@sha256:449da7f8f2ef6285a8445a1e31af57a97b9dae5dcf009b1629c59742c89c68  0.0s
+ => [ashuapp1 internal] load build context                                                                           0.0s
+ => => transferring context: 8.19kB                                                                                  0.0s
+ => CACHED [ashuapp1 2/7] RUN dnf install dotnet-sdk-8.0 -y                                                          0.0s
+ => CACHED [ashuapp1 3/7] RUN mkdir /ashuapp                                                                         0.0s
+ => CACHED [ashuapp1 4/7] COPY sample-dotnetweb-app /ashuapp/                                                        0.0s
+ => CACHED [ashuapp1 5/7] WORKDIR /ashuapp                                                                           0.0s
+ => CACHED [ashuapp1 6/7] RUN dotnet build -o ashubin                                                                0.0s
+ => CACHED [ashuapp1 7/7] RUN dotnet publish -o ashu_publish -p:AssemblyName=ashudotnet                              0.0s
+ => [ashuapp2] exporting to image                                                                                    0.0s
+ => => exporting layers                                                                                              0.0s
+ => => writing image sha256:03343783a7bfd31a8762467618c2579fa1c84a9d7cd15169b80c35039cbea6b2                         0.0s
+ => => naming to docker.io/library/ashudotnetimg:v1                                                                  0.0s
+ => => writing image sha256:fa08eb434bfccb15530a760dc0adc5eb4ee2b27e9766743779a9825cc2a6e38b                         0.0s
+ => => naming to docker.io/library/ashuhttpd:version1                                                                0.0s
+ => [ashuapp2 internal] load build definition from ashuhttpd.dockerfile                                              0.0s
+ => => transferring dockerfile: 366B                                                                                 0.0s
+ => [ashuapp2 internal] load .dockerignore                                                                           0.0s
+ => => transferring context: 2B                                                                                      0.0s
+ => [ashuapp2 internal] load build context                                                                           0.0s
+ => => transferring context: 181B                                                                                    0.0s
+ => CACHED [ashuapp2 2/3] RUN dnf install httpd -y                                                                   0.0s
+ => [ashuapp2 3/3] COPY  dotnet-vhost.conf  /etc/httpd/conf.d/dotnet.conf                                            0.0s
+[+] Running 3/3
+ ✔ Network ashu-customer1-app_default  Created                                                                       0.0s 
+ ✔ Container ashuc1                    Started                                                                       0.0s 
+ ✔ Container ashuc2                    Started
+
+
+=====>>                                                                    0.0s 
+[ashu@ip-172-31-87-20 ashu-customer1-app]$ docker-compose ps
+NAME      IMAGE                COMMAND                  SERVICE    CREATED          STATUS         PORTS
+ashuc1    ashudotnetimg:v1     "/bin/sh -c './ashu_…"   ashuapp1   10 seconds ago   Up 9 seconds   
+ashuc2    ashuhttpd:version1   "/bin/sh -c 'httpd -…"   ashuapp2   10 seconds ago   Up 8 seconds   0.0.0.0:1234->80/tcp, :::1234->80/tcp
+[ashu@ip-172-31-87-20 ashu-customer1-app]$ 
+```
