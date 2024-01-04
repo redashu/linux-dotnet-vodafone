@@ -1,0 +1,17 @@
+version: '3.8' 
+services: # apps containers you want to build and run
+  ashuapp1: # name of appliction for compose 
+    image: ashudotnetimg:v1  # image i want to build 
+    build: .  # path of dockerfile location -- . means current 
+    container_name: ashuc1 # it will create container also 
+  ashuapp2: # creating httpd image and container 
+    image: ashuhttpd:version1 
+    build: 
+      context: .
+      dockerfile: ashuhttpd.dockerfile
+    container_name: ashuc2 
+    ports:
+    - 1234:80  # you guys can use port between 1024 to 60000
+    depends_on:
+    - ashuapp1 
+    
