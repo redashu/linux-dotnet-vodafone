@@ -239,3 +239,55 @@ pipeline {
 
 ```
 
+### adding dotnet and httpd container app testing 
+
+```
+pipeline {
+    agent any
+
+    stages {
+        stage('taking source code from github') {
+            steps {
+                echo 'cloning source code to jenkins server'
+                git 'https://github.com/redashu/ashu-customer1-app.git'
+                // running linux command 
+                sh 'ls'
+            }
+        }
+        // stage for checking jenkins connection with docker 
+        stage('testing docker connection from jenkins'){
+            steps {
+                echo 'lets check docker with jenkins'
+                sh 'docker version'
+                sh 'docker-compose version'
+            }
+        }
+        // running compose file to build images and create container 
+        stage('running docker-compose file'){
+            steps {
+                echo 'running compose'
+                sh 'docker-compose down'
+                sh 'docker-compose up -d --build'
+                sh 'docker-compose ps'
+                sh 'docker-compose images'
+            }
+        }
+        // app access stage for dotnet container 
+        stage('dotnet app test'){
+            steps {
+                echo 'using curl tool to access container1 app'
+                sh 'curl -f http://localhost:1122'
+            }
+        }
+        // httpd webserver testing 
+        stage('httpd container app test'){
+            steps {
+                echo 'using curl again'
+                sh 'curl -f http://localhost:1234'
+            }
+        }
+    }
+}
+
+```
+
