@@ -326,6 +326,239 @@ kubectl  set image deployment  ashunodeapp1  ashudotnetapp=dockerashu/ashudotnet
 
 ```
 
+[root@ip-172-31-81-200 ~]# dnf install nginx 
+Updating Subscription Management repositories.
+Unable to read consumer identity
+
+This system is not registered with an entitlement server. You can use subscription-manager to register.
+
+Last metadata expiration check: 0:18:36 ago on Fri 05 Jan 2024 10:53:57 AM UTC.
+Package nginx-1:1.20.1-14.el9_2.1.x86_64 is already installed.
+Dependencies resolved.
+Nothing to do.
+Complete!
+[root@ip-172-31-81-200 ~]# 
+[root@ip-172-31-81-200 ~]# 
+[root@ip-172-31-81-200 ~]# rpm -ql nginx
+/usr/bin/nginx-upgrade
+/usr/lib/systemd/system/nginx.service
+/usr/share/man/man3/nginx.3pm.gz
+/usr/share/man/man8/nginx-upgrade.8.gz
+/usr/share/man/man8/nginx.8.gz
+/usr/share/nginx/html/404.html
+/usr/share/nginx/html/50x.html
+/usr/share/nginx/html/icons
+/usr/share/nginx/html/icons/poweredby.png
+/usr/share/nginx/html/index.html
+/usr/share/nginx/html/nginx-logo.png
+/usr/share/nginx/html/poweredby.png
+/usr/share/nginx/html/system_noindex_logo.png
+/usr/share/vim/vimfiles/ftdetect/nginx.vim
+/usr/share/vim/vimfiles/ftplugin/nginx.vim
+/usr/share/vim/vimfiles/indent/nginx.vim
+/usr/share/vim/vimfiles/syntax/nginx.vim
+[root@ip-172-31-81-200 ~]# 
+
+```
+
+### default page
+
+```
+[root@ip-172-31-81-200 nginx]# cd  /etc/nginx/
+[root@ip-172-31-81-200 nginx]# ls
+conf.d     fastcgi.conf          fastcgi_params          koi-utf  mime.types          nginx.conf          scgi_params          uwsgi_params          win-utf
+default.d  fastcgi.conf.default  fastcgi_params.default  koi-win  mime.types.default  nginx.conf.default  scgi_params.default  uwsgi_params.default
+[root@ip-172-31-81-200 nginx]# vim nginx.conf
+[root@ip-172-31-81-200 nginx]# 
+[root@ip-172-31-81-200 nginx]# 
+[root@ip-172-31-81-200 nginx]# cd  /usr/share/nginx/html/
+[root@ip-172-31-81-200 html]# ls
+404.html  50x.html  icons  index.html  nginx-logo.png  poweredby.png  system_noindex_logo.png
+[root@ip-172-31-81-200 html]# 
+[root@ip-172-31-81-200 html]# 
+[root@ip-172-31-81-200 html]# systemctl start nginx
+[root@ip-172-31-81-200 html]# systemctl status nginx
+● nginx.service - The nginx HTTP and reverse proxy server
+     Loaded: loaded (/usr/lib/systemd/system/nginx.service; disabled; preset: disabled)
+     Active: active (running) since Fri 2024-01-05 11:15:09 UTC; 4s ago
+    Process: 1303 ExecStartPre=/usr/bin/rm -f /run/nginx.pid (code=exited, status=0/SUCCESS)
+    Process: 1304 ExecStartPre=/usr/sbin/nginx -t (code=exited, status=0/SUCCESS)
+    Process: 1305 ExecStart=/usr/sbin/nginx (code=exited, status=0/SUCCESS)
+   Main PID: 1306 (nginx)
+      Tasks: 2 (limit: 11994)
+     Memory: 1.9M
+        CPU: 25ms
+     CGroup: /system.slice/nginx.service
+             ├─1306 "nginx: master process /usr/sbin/nginx"
+             └─1307 "nginx: worker process"
+
+Jan 05 11:15:09 ip-172-31-81-200.ec2.internal systemd[1]: Starting The nginx HTTP and reverse proxy server...
+Jan 05 11:15:09 ip-172-31-81-200.ec2.internal nginx[1304]: nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+Jan 05 11:15:09 ip-172-31-81-200.ec2.internal nginx[1304]: nginx: configuration file /etc/nginx/nginx.conf test is successful
+Jan 05 11:15:09 ip-172-31-81-200.ec2.internal systemd[1]: Started The nginx HTTP and reverse proxy server.
+[root@ip-172-31-81-200 html]# systemctl enable nginx
+Created symlink /etc/systemd/system/multi-user.target.wants/nginx.service → /usr/lib/systemd/system/nginx.service.
+[root@ip-172-31-81-200 html]# 
+
+```
+
+## Info about Angular 
+
+```
+[root@ip-172-31-81-200 ~]# cd  /opt/
+[root@ip-172-31-81-200 opt]# ls
+dotnetapp  sample
+[root@ip-172-31-81-200 opt]# mkdir  ang-test
+[root@ip-172-31-81-200 opt]# cd  ang-test/
+[root@ip-172-31-81-200 ang-test]# ls
+[root@ip-172-31-81-200 ang-test]# 
+[root@ip-172-31-81-200 ang-test]# 
+[root@ip-172-31-81-200 ang-test]# node -v
+v20.10.0
+[root@ip-172-31-81-200 ang-test]# history  | grep -i npm
+  436  history  | grep -i npm
+[root@ip-172-31-81-200 ang-test]# npm -v
+10.2.3
+[root@ip-172-31-81-200 ang-test]# ng version 
+
+     _                      _                 ____ _     ___
+    / \   _ __   __ _ _   _| | __ _ _ __     / ___| |   |_ _|
+   / △ \ | '_ \ / _` | | | | |/ _` | '__|   | |   | |    | |
+  / ___ \| | | | (_| | |_| | | (_| | |      | |___| |___ | |
+ /_/   \_\_| |_|\__, |\__,_|_|\__,_|_|       \____|_____|___|
+                |___/
+    
+
+Angular CLI: 17.0.9
+Node: 20.10.0
+Package Manager: npm 10.2.3
+OS: linux x64
+
+Angular: 
+... 
+
+Package                      Version
+------------------------------------------------------
+@angular-devkit/architect    0.1700.9 (cli-only)
+@angular-devkit/core         17.0.9 (cli-only)
+@angular-devkit/schematics   17.0.9 (cli-only)
+@schematics/angular          17.0.9 (cli-only)
+
+```
+
+### Creating webui sample using ng
+
+```
+[root@ip-172-31-81-200 ang-test]# ng new ashu-ui-app
+? Which stylesheet format would you like to use? CSS
+? Do you want to enable Server-Side Rendering (SSR) and Static Site Generation (SSG/Prerendering)? No
+CREATE ashu-ui-app/README.md (1063 bytes)
+CREATE ashu-ui-app/.editorconfig (274 bytes)
+CREATE ashu-ui-app/.gitignore (548 bytes)
+CREATE ashu-ui-app/angular.json (2617 bytes)
+CREATE ashu-ui-app/package.json (1042 bytes)
+CREATE ashu-ui-app/tsconfig.json (903 bytes)
+CREATE ashu-ui-app/tsconfig.app.json (263 bytes)
+CREATE ashu-ui-app/tsconfig.spec.json (273 bytes)
+CREATE ashu-ui-app/.vscode/extensions.json (130 bytes)
+CREATE ashu-ui-app/.vscode/launch.json (470 bytes)
+CREATE ashu-ui-app/.vscode/tasks.json (938 bytes)
+CREATE ashu-ui-app/src/main.ts (250 bytes)
+CREATE ashu-ui-app/src/favicon.ico (15086 bytes)
+CREATE ashu-ui-app/src/index.html (295 bytes)
+CREATE ashu-ui-app/src/styles.css (80 bytes)
+CREATE ashu-ui-app/src/app/app.component.css (0 bytes)
+CREATE ashu-ui-app/src/app/app.component.html (20884 bytes)
+CREATE ashu-ui-app/src/app/app.component.spec.ts (931 bytes)
+CREATE ashu-ui-app/src/app/app.component.ts (369 bytes)
+CREATE ashu-ui-app/src/app/app.config.ts (227 bytes)
+CREATE ashu-ui-app/src/app/app.routes.ts (77 bytes)
+CREATE ashu-ui-app/src/assets/.gitkeep (0 bytes)
+✔ Packages installed successfully.
+hint: Using 'master' as the name for the initial branch. This default branch name
+hint: is subject to change. To configure the initial branch name to use in all
+hint: of your new repositories, which will suppress this warning, call:
+hint: 
+hint: 	git config --global init.defaultBranch <name>
+hint: 
+hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+hint: 'development'. The just-created branch can be renamed via this command:
+hint: 
+hint: 	git branch -m <name>
+    Successfully initialized git.
+
+```
+
+### we can either build or serve it 
+
+### note: if we want apache or Nginx to host app then build it else ng serve
+
+### build
+
+```
+[root@ip-172-31-81-200 ashu-ui-app]# ls
+angular.json  node_modules  package.json  package-lock.json  README.md  src  tsconfig.app.json  tsconfig.json  tsconfig.spec.json
+[root@ip-172-31-81-200 ashu-ui-app]# ng build
+
+Initial Chunk Files   | Names         |  Raw Size | Estimated Transfer Size
+main-K3ZRKFU7.js      | main          | 192.23 kB |                52.68 kB
+polyfills-LZBJRJJE.js | polyfills     |  32.69 kB |                10.59 kB
+styles-5INURTSO.css   | styles        |   0 bytes |                 0 bytes
+
+                      | Initial Total | 224.93 kB |                63.28 kB
+
+Application bundle generation complete. [17.772 seconds]
+[root@ip-172-31-81-200 ashu-ui-app]# ls
+angular.json  dist  node_modules  package.json  package-lock.json  README.md  src  tsconfig.app.json  tsconfig.json  tsconfig.spec.json
+[root@ip-172-31-81-200 ashu-ui-app]# ls dist/
+ashu-ui-app
+[root@ip-172-31-81-200 ashu-ui-app]# ls dist/ashu-ui-app/
+3rdpartylicenses.txt  browser
+[root@ip-172-31-81-200 ashu-ui-app]# ls dist/ashu-ui-app/browser/
+favicon.ico  index.html  main-K3ZRKFU7.js  polyfills-LZBJRJJE.js  styles-5INURTSO.css
+[root@ip-172-31-81-200 ashu-ui-app]# 
+
+
+```
+
+### hosting angular app
+
+```
+ 477  ng new ashu-ui
+  478  ls
+  479  ng new anuj-app
+  480  ls
+  481  cd  ashu-ui/
+  482  ls
+  483  ng build
+  484  ls
+  485  ls dist/ashu-ui/browser/
+  486  cp -rf  dist/ashu-ui/browser/    /var/www/html/ashu
+  487  cd ../anuj-app/
+  488  ls
+  489  ng build
+  490  ls
+  491  cp -rf dist/anuj-app/browser/  /var/www/html/anuj
+  492  history 
+  493  systemctl start httpd
+  494  setenforce 0
+  495  cd /var/www/html/
+  496  ls
+  497  rm -rf index.html  favicon.ico  main-K3ZRKFU7.js  polyfills-LZBJRJJE.js  styles-5INURTSO.css 
+  498  systemctl restart httpd
+  499  ls -l
+  500  ls ashu/
+  501  ls -l
+  502  ls ashu/
+  503  ls ashu/ -l
+  504  cd  /etc/httpd/conf.d/
+  505  ls
+  506  touch anuj.conf
+  507  touch ashu.conf
+  508  ls
+  509  cd /var/www/html/
+  510  ls
+  511  cp -rf ashu/* .
 
 ```
 
