@@ -72,5 +72,69 @@ LISTEN      0           511                          *:80                       
 
 ```
 
+### history 
 
+```
+1  hostnamectl set-hostname server2
+    2   dnf install dotnet-sdk-8.0.x86_64   httpd -y
+    3  ls
+    4  dnf install git -y
+    5  cd /opt/
+    6  ls
+    7  git clone https://github.com/redashu/ashu-customer1-app.git
+    8  cd ashu-customer1-app/
+    9  ls
+   10  cd sample-dotnetweb-app/
+   11  ls
+   12  dotnet build
+   13  dotnet publish
+   14  vim /etc/systemd/system/ashuapp.service
+   15  dnf install vim -y
+   16  vim /etc/systemd/system/ashuapp.service
+   17  systemctl start ashu-webapp.csproj 
+   18  systemctl start ashu-webapp.service
+   19  systemctl start ashuapp.service
+   20  systemctl status ashuapp.service
+   21  cd  /etc/httpd/conf.d/
+   22  ls
+   23  vim ashu.conf
+   24  httpd -t
+   25  systemctl restart httpd
+   26  ls
+   27  cat  ashu.conf 
+
+```
+
+### content in side ashuapp.service
+
+```
+[Unit]
+Description=ashu ASP.NET Core Application
+
+[Service]
+WorkingDirectory=/opt/ashu-customer1-app/sample-dotnetweb-app/bin/Release/net8.0/publish/
+ExecStart=/opt/ashu-customer1-app/sample-dotnetweb-app/bin/Release/net8.0/publish/ashu-webapp  --urls=http://localhost:81
+Restart=always
+RestartSec=10
+SyslogIdentifier=your-app
+User=root
+Environment=ASPNETCORE_ENVIRONMENT=Production
+
+[Install]
+WantedBy=multi-user.target
+```
+
+### content ashu.conf
+
+```
+<virtualhost *:80>
+#  we wanto run dotnet app using this vhost 
+	servername vodafone1.delvex.io
+	ProxyPass /  http://localhost:81/
+	ProxyPassReverse / http://localhost:81/
+	ErrorLog /var/log/httpd/ashuapp_error.log
+ 	CustomLog /var/log/httpd/ashuapp_access.log combined
+</virtualhost>
+
+```
 
