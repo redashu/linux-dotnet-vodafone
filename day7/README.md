@@ -241,5 +241,46 @@ ashunodeapp   1/1     1            1           37s
 [ashu@ip-172-31-87-20 ~]$ 
 
 ```
+### K8s specific commands 
 
+```
+49  kubectl  get  nodes
+   50  kubectl get nodes
+   51  kubectl create  deployment  ashunodeapp  --image=dockerashu/ashudotnetapp:version10
+   52  kubectl get  deploy
+   53  kubectl get po 
+   54  kubectl get  deploy
+   55  kubectl describe  deploy madhurinodeapp
+   56  kubectl get  deploy
+   57  kubectl delete deploy madhurinodeapp
+   58  kubectl describe deploy poojanodeapp
+   59  kubectl get pods
+   60  kubectl describe pod poojanodeapp-5cf9d8c9b8-4pkgf
+   61  kubectl get po 
+   62  kubectl get nodes
+   63  kubectl describe pod shaileshnodeapp-66b86b5d4-4xnj5
+   64  kubectl run hello --image=nginx 
+   65  kubectl get pods
+   66  kubectl describe  pod hello
+   67  kubectl get  deploy
+   68  kubectl get  nodes
+   69  kubectl  get pods
+   70  kubectl  get pods  ashunodeapp-55f667ff76-8kq5t  -o wide
+   71  kubectl describe  pod ashunodeapp-55f667ff76-8kq5t
+   72  history 
+[ashu@ip-172-31-87-20 ~]$ kubectl delete all --all
+pod "anujapp-79db45cc97-kx5dd" deleted
+pod "ashunodeapp-55f667ff76-8kq5t" deleted
+pod "hello" deleted
+pod "madhurinodeapp-ff749cdc-qpgtc" deleted
+pod "poojanodeapp-5cf9d8c9b8-4pkgf" deleted
+pod "shaileshnodeapp-66b86b5d4-4xnj5" deleted
+pod "vijaydotnetapp-8496544c7b-9hddg" deleted
+service "kubernetes" deleted
+deployment.apps "anujapp" deleted
+deployment.apps "ashunodeapp" deleted
+deployment.apps "madhurinodeapp" deleted
+deployment.apps "poojanodeapp" deleted
+
+```
 
