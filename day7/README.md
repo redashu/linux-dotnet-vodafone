@@ -284,3 +284,31 @@ deployment.apps "poojanodeapp" deleted
 
 ```
 
+### k8s loadbalancer
+
+```
+[root@ip-172-31-87-20 ~]# kubectl get  deploy
+NAME           READY   UP-TO-DATE   AVAILABLE   AGE
+ashunodeapp1   1/1     1            1           8m47s
+[root@ip-172-31-87-20 ~]# 
+[root@ip-172-31-87-20 ~]# 
+[root@ip-172-31-87-20 ~]# kubectl expose deploy ashunodeapp1  --type LoadBalancer --port 80 --target-port 5000 
+service/ashunodeapp1 exposed
+[root@ip-172-31-87-20 ~]# kubectl  get  svc
+NAME           TYPE           CLUSTER-IP    EXTERNAL-IP   PORT(S)        AGE
+ashunodeapp1   LoadBalancer   10.96.49.81   <pending>     80:30492/TCP   5s
+kubernetes     ClusterIP      10.96.0.1     <none>        443/TCP        10m
+[root@ip-172-31-87-20 ~]# kubectl  get  svc
+NAME           TYPE           CLUSTER-IP    EXTERNAL-IP   PORT(S)        AGE
+ashunodeapp1   LoadBalancer   10.96.49.81   <pending>     80:30492/TCP   22s
+kubernetes     ClusterIP      10.96.0.1     <none>        443/TCP        10m
+[root@ip-172-31-87-20 ~]# kubectl  get  svc
+NAME           TYPE           CLUSTER-IP    EXTERNAL-IP     PORT(S)        AGE
+ashunodeapp1   LoadBalancer   10.96.49.81   146.56.51.131   80:30492/TCP   42s
+kubernetes     ClusterIP      10.96.0.1     <none>          443/TCP        10m
+[root@ip-172-31-87-20 ~]# 
+
+
+```
+
+
