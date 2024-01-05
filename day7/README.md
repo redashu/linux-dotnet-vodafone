@@ -138,3 +138,85 @@ WantedBy=multi-user.target
 
 ```
 
+### docker image to k8s 
+
+<img src="k8s.png">
+
+### docker image -- 
+
+### kubeclt checking 
+
+```
+[ashu@ip-172-31-87-20 ~]$ kubectl version --client 
+Client Version: v1.29.0
+Kustomize Version: v5.0.4-0.20230601165947-6ce0bf390ce3
+```
+
+### how to connect linux server with Kubernetes 
+
+<img src="k8s1.png">
+
+### test user configure 
+
+```
+[test@ip-172-31-87-20 ~]$ whoami
+test
+[test@ip-172-31-87-20 ~]$ pwd
+/home/test
+[test@ip-172-31-87-20 ~]$ mkdir  ~/.kube
+[test@ip-172-31-87-20 ~]$ mkdir  ~/.oci
+[test@ip-172-31-87-20 ~]$ pwd
+/home/test
+[test@ip-172-31-87-20 ~]$ ls -a
+.  ..  .bash_logout  .bash_profile  .bashrc  .kube  .oci
+[test@ip-172-31-87-20 ~]$ 
+
+
+```
+
+### copy config file in .kube folder
+
+```
+[test@ip-172-31-87-20 ~]$ cp -v  /tmp/k8s-cred/config   ~/.kube/config
+‘/tmp/k8s-cred/config’ -> ‘/home/test/.kube/config’
+[test@ip-172-31-87-20 ~]$ 
+[test@ip-172-31-87-20 ~]$ 
+[test@ip-172-31-87-20 ~]$ ls  -a .kube/
+.  ..  config
+[test@ip-172-31-87-20 ~]$ ls  -al .kube/
+```
+
+### doing this 
+
+```
+[test@ip-172-31-87-20 ~]$ kubectl  get nodes
+WARNING: Permissions on /home/test/.oci/config are too open. 
+To fix this please try executing the following command: 
+oci setup repair-file-permissions --file /home/test/.oci/config 
+Alternatively to hide this warning, you may set the environment variable, OCI_CLI_SUPPRESS_FILE_PERMISSIONS_WARNING: 
+export OCI_CLI_SUPPRESS_FILE_PERMISSIONS_WARNING=True
+
+WARNING: Permissions on /home/test/.oci/oci_api_key.pem are too open. 
+To fix this please try executing the following command: 
+oci setup repair-file-permissions --file /home/test/.oci/oci_api_key.pem 
+Alternatively to hide this warning, you may set the environment variable, OCI_CLI_SUPPRESS_FILE_PERMISSIONS_WARNING: 
+export OCI_CLI_SUPPRESS_FILE_PERMISSIONS_WARNING=True
+
+NAME          STATUS   ROLES   AGE    VERSION
+10.0.10.156   Ready    node    116m   v1.28.2
+10.0.10.50    Ready    node    115m   v1.28.2
+10.0.10.70    Ready    node    116m   v1.28.2
+[test@ip-172-31-87-20 ~]$ 
+[test@ip-172-31-87-20 ~]$ 
+[test@ip-172-31-87-20 ~]$ chmod 600   /home/test/.oci/config 
+[test@ip-172-31-87-20 ~]$ chmod 600   /home/test/.oci/oci_api_key.pem 
+[test@ip-172-31-87-20 ~]$ 
+[test@ip-172-31-87-20 ~]$ kubectl  get nodes
+NAME          STATUS   ROLES   AGE    VERSION
+10.0.10.156   Ready    node    117m   v1.28.2
+10.0.10.50    Ready    node    117m   v1.28.2
+10.0.10.70    Ready    node    117m   v1.28.2
+
+```
+
+
