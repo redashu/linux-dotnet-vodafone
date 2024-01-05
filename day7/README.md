@@ -318,5 +318,14 @@ kubernetes     ClusterIP      10.96.0.1     <none>          443/TCP        10m
 kubectl  set image deployment  ashunodeapp1  ashudotnetapp=dockerashu/ashudotnetapp:version15
 ```
 
+### Nginx vs httpd 
 
+<img src="ng.png">
+
+### installing nginx web server
+
+```
+
+
+```
 
