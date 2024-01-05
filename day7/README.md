@@ -219,4 +219,27 @@ NAME          STATUS   ROLES   AGE    VERSION
 
 ```
 
+### Deploy docker hub image to k8s 
+
+```
+[ashu@ip-172-31-87-20 ~]$ kubectl create  deployment  ashunodeapp  --image=dockerashu/ashudotnetapp:version10
+deployment.apps/ashunodeapp created
+[ashu@ip-172-31-87-20 ~]$ 
+[ashu@ip-172-31-87-20 ~]$ kubectl get  deploy
+NAME          READY   UP-TO-DATE   AVAILABLE   AGE
+ashunodeapp   0/1     1            0           15s
+[ashu@ip-172-31-87-20 ~]$ 
+[ashu@ip-172-31-87-20 ~]$ kubectl get  deploy
+NAME          READY   UP-TO-DATE   AVAILABLE   AGE
+ashunodeapp   0/1     1            0           24s
+[ashu@ip-172-31-87-20 ~]$ kubectl get po 
+NAME                           READY   STATUS    RESTARTS   AGE
+ashunodeapp-55f667ff76-8kq5t   1/1     Running   0          32s
+[ashu@ip-172-31-87-20 ~]$ kubectl get  deploy
+NAME          READY   UP-TO-DATE   AVAILABLE   AGE
+ashunodeapp   1/1     1            1           37s
+[ashu@ip-172-31-87-20 ~]$ 
+
+```
+
 
